@@ -16,6 +16,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Realm.init(this);
 
         Toothpick.setConfiguration(Configuration.forProduction().disableReflection());
         Toothpick.setConfiguration(Configuration.forDevelopment().preventMultipleRootScopes());
@@ -23,6 +24,6 @@ public class App extends Application {
         FactoryRegistryLocator.setRootRegistry(new com.example.alien.course04task02.FactoryRegistry());
         Scope scope = Toothpick.openScope("Application");
         scope.installModules(new ApplicationModule());
-        Realm.init(this);
+
     }
 }
