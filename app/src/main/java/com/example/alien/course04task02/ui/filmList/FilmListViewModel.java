@@ -12,8 +12,8 @@ public class FilmListViewModel extends ViewModel {
     private MutableLiveData<List<Film>> mFilmList = new MutableLiveData<>();
     private IRepository mRepository;
 
-    public FilmListViewModel(IRepository mRepository) {
-        this.mRepository = mRepository;
+    public FilmListViewModel(IRepository repository) {
+        this.mRepository = repository;
         mFilmList.setValue(mRepository.getAll());
     }
 

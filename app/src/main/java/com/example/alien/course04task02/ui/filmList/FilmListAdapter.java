@@ -13,6 +13,8 @@ import com.example.alien.course04task02.event.FilmListItemClickEvent;
 
 import org.greenrobot.eventbus.EventBus;
 
+import javax.inject.Inject;
+
 
 public class FilmListAdapter extends ListAdapter<Film, FilmListViewHolder> {
 
@@ -28,7 +30,8 @@ public class FilmListAdapter extends ListAdapter<Film, FilmListViewHolder> {
         }
     };
 
-    public FilmListAdapter(IOnItemClickListener IOnItemClickListener) {
+    @Inject
+    public FilmListAdapter() {
         super(DIFF_CALLBACK);
     }
 

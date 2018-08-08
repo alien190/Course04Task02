@@ -45,15 +45,18 @@ public class FilmListFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fr_film_list, container, false);
         ButterKnife.bind(this, view);
-        Scope scope = Toothpick.openScopes("Application", "FilmListFragment");
-        scope.installModules(new FilmListFragmentModule(this));
-        Toothpick.inject(this, scope);
+
         return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        Scope scope = Toothpick.openScopes("Application", "FilmListFragment");
+        scope.installModules(new FilmListFragmentModule(this));
+        Toothpick.inject(this, scope);
+
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mAdapter);
         mViewModel.getFilmList().observe(this, list -> mAdapter.submitList(list));
