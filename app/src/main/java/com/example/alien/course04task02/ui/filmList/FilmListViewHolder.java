@@ -1,0 +1,53 @@
+package com.example.alien.course04task02.ui.filmList;
+
+import android.media.browse.MediaBrowser;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.TextView;
+
+import com.example.alien.course04task02.R;
+import com.example.alien.course04task02.data.model.Film;
+import com.example.alien.course04task02.utils.StringUtils;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+
+public class FilmListViewHolder extends RecyclerView.ViewHolder {
+    private View view;
+    private long mId;
+
+    @BindView(R.id.tvName)
+    TextView mTvName;
+    @BindView(R.id.tvDirector)
+    TextView mTvDirector;
+    @BindView(R.id.tvYear)
+    TextView mTvYear;
+    @BindView(R.id.tvRate)
+    TextView mTvRate;
+
+
+    public FilmListViewHolder(@NonNull View itemView) {
+        super(itemView);
+        view = itemView;
+        ButterKnife.bind(this, view);
+    }
+
+    public void bind(Film film) {
+        mTvName.setText(film.getName());
+        mTvDirector.setText(film.getDirector());
+        mTvYear.setText(film.getYear());
+        mTvRate.setText(StringUtils.rateToString(film.getRating()));
+        mId = film.getId();
+    }
+
+    public void setOnItemClickListener(final FilmListAdapter.OnItemClickListener listener) {
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (listener != null) listener.OnItemClick(mId);
+            }
+        });
+    }
+}

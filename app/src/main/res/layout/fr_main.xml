@@ -4,14 +4,21 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="btn" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="sdfsfds"/>
+        android:layout_height="wrap_content">
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="btn" />
+    </RelativeLayout>
+
+    <fragment
+        android:id="@+id/frFilmList"
+        android:name="com.example.alien.course04task02.ui.filmList.FilmListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
 </LinearLayout>
