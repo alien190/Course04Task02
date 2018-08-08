@@ -54,6 +54,11 @@ public class FilmListFragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mAdapter);
 
+    }
 
+    @Override
+    public void onDestroy() {
+        Toothpick.closeScope("FilmListFragment");
+        super.onDestroy();
     }
 }

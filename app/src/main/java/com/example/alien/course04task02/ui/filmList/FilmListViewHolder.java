@@ -1,6 +1,5 @@
 package com.example.alien.course04task02.ui.filmList;
 
-import android.media.browse.MediaBrowser;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -42,7 +41,7 @@ public class FilmListViewHolder extends RecyclerView.ViewHolder {
         mId = film.getId();
     }
 
-    public void setOnItemClickListener(final FilmListAdapter.OnItemClickListener listener) {
+    public void setOnItemClickListener(final FilmListAdapter.IOnItemClickListener listener) {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

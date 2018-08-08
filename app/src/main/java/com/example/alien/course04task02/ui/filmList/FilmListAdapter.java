@@ -9,8 +9,10 @@ import android.view.ViewGroup;
 
 import com.example.alien.course04task02.R;
 import com.example.alien.course04task02.data.model.Film;
+import com.example.alien.course04task02.event.FilmListItemClickEvent;
 
-import toothpick.Scope;
+import org.greenrobot.eventbus.EventBus;
+
 
 public class FilmListAdapter extends ListAdapter<Film, FilmListViewHolder> {
 
@@ -26,7 +28,7 @@ public class FilmListAdapter extends ListAdapter<Film, FilmListViewHolder> {
         }
     };
 
-    public FilmListAdapter() {
+    public FilmListAdapter(IOnItemClickListener IOnItemClickListener) {
         super(DIFF_CALLBACK);
     }
 
@@ -40,9 +42,10 @@ public class FilmListAdapter extends ListAdapter<Film, FilmListViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull FilmListViewHolder filmListViewHolder, int i) {
         filmListViewHolder.bind(getItem(i));
+        filmListViewHolder.setOnItemClickListener(id -> EventBus.getDefault().post(new FilmListItemClickEvent(id)));
     }
 
-    interface OnItemClickListener {
+    interface IOnItemClickListener {
         void OnItemClick(long id);
     }
 }
