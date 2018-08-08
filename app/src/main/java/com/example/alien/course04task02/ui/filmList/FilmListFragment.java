@@ -28,6 +28,9 @@ public class FilmListFragment extends Fragment {
     @Inject
     FilmListAdapter mAdapter;
 
+    @Inject
+    FilmListViewModel mViewModel;
+
     public static FilmListFragment newInstance() {
 
         Bundle args = new Bundle();
@@ -43,7 +46,7 @@ public class FilmListFragment extends Fragment {
         view = inflater.inflate(R.layout.fr_film_list, container, false);
         ButterKnife.bind(this, view);
         Scope scope = Toothpick.openScopes("Application", "FilmListFragment");
-        scope.installModules(new FilmListFragmentModule());
+        scope.installModules(new FilmListFragmentModule(this));
         Toothpick.inject(this, scope);
         return view;
     }
@@ -53,7 +56,7 @@ public class FilmListFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mAdapter);
-
+        mViewModel.getFilmList().observe(this, list -> mAdapter.submitList(list));
     }
 
     @Override

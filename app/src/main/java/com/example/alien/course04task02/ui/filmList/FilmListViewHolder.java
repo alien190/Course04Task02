@@ -42,11 +42,8 @@ public class FilmListViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void setOnItemClickListener(final FilmListAdapter.IOnItemClickListener listener) {
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (listener != null) listener.OnItemClick(mId);
-            }
+        view.setOnClickListener(view -> {
+            if (listener != null) listener.OnItemClick(mId);
         });
     }
 }
