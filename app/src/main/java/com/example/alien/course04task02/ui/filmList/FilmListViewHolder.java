@@ -36,7 +36,7 @@ public class FilmListViewHolder extends RecyclerView.ViewHolder {
     public void bind(Film film) {
         mTvName.setText(film.getName());
         mTvDirector.setText(film.getDirector());
-        mTvYear.setText(film.getYear());
+        mTvYear.setText(String.valueOf(film.getYear()));
         mTvRate.setText(StringUtils.rateToString(film.getRating()));
         mId = film.getId();
     }

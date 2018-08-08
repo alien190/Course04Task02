@@ -15,6 +15,7 @@ public class FilmListViewModel extends ViewModel {
     public FilmListViewModel(IRepository repository) {
         this.mRepository = repository;
         mFilmList.setValue(mRepository.getAll());
+       // mRepository.createFilmAndSave("Мег: Монстр глубины", "Джон Тёртелтауб", 2018, 5.0);
     }
 
     public MutableLiveData<List<Film>> getFilmList() {

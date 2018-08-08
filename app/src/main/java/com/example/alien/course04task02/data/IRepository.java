@@ -24,5 +24,6 @@ public interface IRepository {
 
     List<Film> getTopFilms(int count);
 
+    public long createFilmAndSave(String name, String director, int year, double rating);
 
 }

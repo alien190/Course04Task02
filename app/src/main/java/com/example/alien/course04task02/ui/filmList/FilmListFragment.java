@@ -60,6 +60,7 @@ public class FilmListFragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mAdapter);
         mViewModel.getFilmList().observe(this, list -> mAdapter.submitList(list));
+
     }
 
     @Override
