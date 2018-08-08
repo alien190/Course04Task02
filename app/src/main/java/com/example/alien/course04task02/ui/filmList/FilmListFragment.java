@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.alien.course04task02.R;
 import com.example.alien.course04task02.di.FilmListFragmentModule;
@@ -20,7 +21,7 @@ import butterknife.ButterKnife;
 import toothpick.Scope;
 import toothpick.Toothpick;
 
-public class FilmListFragment extends Fragment {
+public class FilmListFragment extends Fragment implements FilmListAdapter.IOnItemClickListener{
     View view;
     @BindView(R.id.rvFilmList)
     RecyclerView mRecyclerView;
@@ -67,5 +68,16 @@ public class FilmListFragment extends Fragment {
     public void onDestroy() {
         Toothpick.closeScope("FilmListFragment");
         super.onDestroy();
+    }
+
+    @Override
+    public void OnItemClick(long id) {
+        Toast.makeText(getContext(), "click id " + id, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public boolean OnItemLongClick(long id) {
+        Toast.makeText(getContext(), "long click id " + id, Toast.LENGTH_SHORT).show();
+        return true;
     }
 }

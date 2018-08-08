@@ -18,6 +18,8 @@ import javax.inject.Inject;
 
 public class FilmListAdapter extends ListAdapter<Film, FilmListViewHolder> {
 
+    private IOnItemClickListener mOnItemClickListener;
+
     private static DiffUtil.ItemCallback<Film> DIFF_CALLBACK = new DiffUtil.ItemCallback<Film>() {
         @Override
         public boolean areItemsTheSame(@NonNull Film film, @NonNull Film t1) {
@@ -30,9 +32,10 @@ public class FilmListAdapter extends ListAdapter<Film, FilmListViewHolder> {
         }
     };
 
-    @Inject
-    public FilmListAdapter() {
+
+    public FilmListAdapter(IOnItemClickListener onItemClickListener) {
         super(DIFF_CALLBACK);
+        mOnItemClickListener = onItemClickListener;
     }
 
     @NonNull
@@ -45,10 +48,11 @@ public class FilmListAdapter extends ListAdapter<Film, FilmListViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull FilmListViewHolder filmListViewHolder, int i) {
         filmListViewHolder.bind(getItem(i));
-        filmListViewHolder.setOnItemClickListener(id -> EventBus.getDefault().post(new FilmListItemClickEvent(id)));
+        filmListViewHolder.setOnItemClickListener(mOnItemClickListener);
     }
 
-    interface IOnItemClickListener {
+    public interface IOnItemClickListener {
         void OnItemClick(long id);
+        boolean OnItemLongClick(long id);
     }
 }
