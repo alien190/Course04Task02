@@ -1,22 +1,31 @@
 package com.example.alien.course04task02.ui;
 
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
-import com.example.alien.course04task02.R;
 import com.example.alien.course04task02.common.SingleFragmentActivity;
+import com.example.alien.course04task02.di.MainActivityModule;
+
+import javax.inject.Inject;
+
+import toothpick.Scope;
+import toothpick.Toothpick;
 
 public class MainActivity extends SingleFragmentActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-    }
+    @Inject
+    MainFragment fragment;
 
     @Override
     protected Fragment getFragment() {
-        return null;
+        Scope scope = Toothpick.openScopes("Application", "MainActivity");
+        scope.installModules(new MainActivityModule());
+        Toothpick.inject(this, scope);
+        return fragment;
+    }
+
+    @Override
+    protected void onDestroy() {
+        Toothpick.closeScope("MainActivity");
+        super.onDestroy();
     }
 }
