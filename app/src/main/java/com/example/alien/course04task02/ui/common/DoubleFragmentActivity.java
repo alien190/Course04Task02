@@ -8,12 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.alien.course04task02.R;
 
-public abstract class SingleFragmentActivity extends AppCompatActivity {
+public abstract class DoubleFragmentActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.ac_single_fragment);
+        setContentView(R.layout.ac_double_fragment);
         if (savedInstanceState == null) {
             changeFragment(getFragment());
         }

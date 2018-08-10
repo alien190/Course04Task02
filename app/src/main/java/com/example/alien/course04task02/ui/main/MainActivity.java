@@ -2,7 +2,7 @@ package com.example.alien.course04task02.ui.main;
 
 import android.support.v4.app.Fragment;
 
-import com.example.alien.course04task02.ui.common.SingleFragmentActivity;
+import com.example.alien.course04task02.ui.common.DoubleFragmentActivity;
 import com.example.alien.course04task02.di.ActivityModule;
 
 import javax.inject.Inject;
@@ -10,7 +10,7 @@ import javax.inject.Inject;
 import toothpick.Scope;
 import toothpick.Toothpick;
 
-public class MainActivity extends SingleFragmentActivity {
+public class MainActivity extends DoubleFragmentActivity {
 
     @Inject
     MainFragment fragment;
