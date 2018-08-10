@@ -13,8 +13,8 @@ import javax.inject.Inject;
 public class SearchActivity extends DoubleFragmentActivity {
 
     public static final int TYPE_SEARCH_BY_NAME = 1;
-
     private static final String TYPE_KEY = "SearchActivityTypeKey";
+
 
     @Inject
     SearchFragment mSearchFragment;
