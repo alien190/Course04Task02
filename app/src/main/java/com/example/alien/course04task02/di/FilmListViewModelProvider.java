@@ -2,6 +2,7 @@ package com.example.alien.course04task02.di;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 
 import com.example.alien.course04task02.data.IRepository;
 import com.example.alien.course04task02.ui.filmList.FilmListViewModel;
@@ -15,13 +16,12 @@ class FilmListViewModelProvider implements Provider<FilmListViewModel> {
     @Inject
     IRepository mRepository;
     @Inject
-    @Named("FilmListFragment")
-    Fragment mFragment;
+    AppCompatActivity mActivity;
 
 
     @Override
     public FilmListViewModel get() {
             FilmListViewModelCustomFactory factory = new FilmListViewModelCustomFactory(mRepository);
-            return ViewModelProviders.of(mFragment, factory).get(FilmListViewModel.class);
+            return ViewModelProviders.of(mActivity, factory).get(FilmListViewModel.class);
     }
 }

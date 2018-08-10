@@ -3,7 +3,7 @@ package com.example.alien.course04task02.ui;
 import android.support.v4.app.Fragment;
 
 import com.example.alien.course04task02.common.SingleFragmentActivity;
-import com.example.alien.course04task02.di.MainActivityModule;
+import com.example.alien.course04task02.di.ActivityModule;
 
 import javax.inject.Inject;
 
@@ -18,7 +18,7 @@ public class MainActivity extends SingleFragmentActivity {
     @Override
     protected Fragment getFragment() {
         Scope scope = Toothpick.openScopes("Application", "MainActivity");
-        scope.installModules(new MainActivityModule());
+        scope.installModules(new ActivityModule(this));
         Toothpick.inject(this, scope);
         return fragment;
     }

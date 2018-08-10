@@ -54,14 +54,13 @@ public class FilmListFragment extends Fragment implements FilmListAdapter.IOnIte
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        Scope scope = Toothpick.openScopes("Application", "FilmListFragment");
+        Scope scope = Toothpick.openScopes("MainActivity", "FilmListFragment");
         scope.installModules(new FilmListFragmentModule(this));
         Toothpick.inject(this, scope);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mAdapter);
         mViewModel.getFilmList().observe(this, list -> mAdapter.submitList(list));
-
     }
 
     @Override
