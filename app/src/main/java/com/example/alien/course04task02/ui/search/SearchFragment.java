@@ -1,5 +1,4 @@
-package com.example.alien.course04task02.ui.main;
-
+package com.example.alien.course04task02.ui.search;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,15 +10,12 @@ import android.view.ViewGroup;
 
 import com.example.alien.course04task02.R;
 
-public class MainFragment extends Fragment {
-
-    View view;
-
-    public static MainFragment newInstance() {
+public class SearchFragment extends Fragment {
+    public static SearchFragment newInstance() {
 
         Bundle args = new Bundle();
 
-        MainFragment fragment = new MainFragment();
+        SearchFragment fragment = new SearchFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -27,7 +23,6 @@ public class MainFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fr_main_header, container, false);
-        return view;
+        return inflater.inflate(R.layout.fr_search_header, container, false);
     }
 }

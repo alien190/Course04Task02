@@ -7,6 +7,6 @@ import com.example.alien.course04task02.ui.common.DoubleFragmentActivity;
 public class SearchActivity extends DoubleFragmentActivity {
     @Override
     protected Fragment getFragment() {
-        return null;
+        return SearchFragment.newInstance();
     }
 }
