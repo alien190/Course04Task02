@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.example.alien.course04task02.R;
 import com.example.alien.course04task02.ui.common.BaseFragment;
@@ -28,7 +29,7 @@ public class SearchFragment extends BaseFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if(mSearchType == 1) {
-            int i=1;
+            //RelativeLayout
         }
         return inflater.inflate(R.layout.fr_search_header, container, false);
     }
