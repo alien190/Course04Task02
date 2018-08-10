@@ -1,4 +1,4 @@
-package com.example.alien.course04task02.common;
+package com.example.alien.course04task02.ui.common;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
