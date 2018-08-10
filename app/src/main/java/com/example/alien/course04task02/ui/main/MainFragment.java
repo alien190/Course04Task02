@@ -1,4 +1,4 @@
-package com.example.alien.course04task02.ui;
+package com.example.alien.course04task02.ui.main;
 
 
 import android.os.Bundle;
