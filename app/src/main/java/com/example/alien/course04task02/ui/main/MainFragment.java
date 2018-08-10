@@ -38,9 +38,7 @@ public class MainFragment extends BaseFragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setClass(getContext(), SearchActivity.class);
-                startActivity(intent);
+                SearchActivity.startActivity(getContext(), 1);
             }
         });
         return view;
