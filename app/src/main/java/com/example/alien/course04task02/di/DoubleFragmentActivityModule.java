@@ -4,17 +4,20 @@ package com.example.alien.course04task02.di;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.alien.course04task02.ui.main.MainFragment;
+import com.example.alien.course04task02.ui.search.SearchFragment;
+
 import toothpick.config.Module;
 
 
-public class ActivityModule extends Module {
+public class DoubleFragmentActivityModule extends Module {
 
     private AppCompatActivity mActivity;
 
-    public ActivityModule(AppCompatActivity activity) {
+    public DoubleFragmentActivityModule(AppCompatActivity activity) {
         mActivity = activity;
 
         bind(MainFragment.class).toInstance(MainFragment.newInstance());
+        bind(SearchFragment.class).toInstance(SearchFragment.newInstance());
         bind(AppCompatActivity.class).toInstance(mActivity);
     }
 

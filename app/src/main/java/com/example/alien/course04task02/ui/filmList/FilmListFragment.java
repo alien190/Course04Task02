@@ -1,5 +1,6 @@
 package com.example.alien.course04task02.ui.filmList;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,13 +16,14 @@ import com.example.alien.course04task02.R;
 import com.example.alien.course04task02.di.FilmListFragmentModule;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import toothpick.Scope;
 import toothpick.Toothpick;
 
-public class FilmListFragment extends Fragment implements FilmListAdapter.IOnItemClickListener{
+public class FilmListFragment extends Fragment implements FilmListAdapter.IOnItemClickListener {
     View view;
     @BindView(R.id.rvFilmList)
     RecyclerView mRecyclerView;
@@ -31,6 +33,8 @@ public class FilmListFragment extends Fragment implements FilmListAdapter.IOnIte
 
     @Inject
     FilmListViewModel mViewModel;
+
+    private String mScopeName;
 
     public static FilmListFragment newInstance() {
 
@@ -51,12 +55,17 @@ public class FilmListFragment extends Fragment implements FilmListAdapter.IOnIte
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        Scope scope = Toothpick.openScopes("MainActivity", "FilmListFragment");
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mScopeName = context.getClass().getSimpleName() + "." + this.getClass().getSimpleName();
+        Scope scope = Toothpick.openScopes(context.getClass().getSimpleName(), mScopeName);
         scope.installModules(new FilmListFragmentModule(this));
         Toothpick.inject(this, scope);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mAdapter);
@@ -65,7 +74,7 @@ public class FilmListFragment extends Fragment implements FilmListAdapter.IOnIte
 
     @Override
     public void onDestroy() {
-        Toothpick.closeScope("FilmListFragment");
+        Toothpick.closeScope(mScopeName);
         super.onDestroy();
     }
 
