@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.alien.course04task02.R;
 import com.example.alien.course04task02.di.FilmListFragmentModule;
+import com.example.alien.course04task02.ui.common.BaseFragment;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -23,16 +24,13 @@ import butterknife.ButterKnife;
 import toothpick.Scope;
 import toothpick.Toothpick;
 
-public class FilmListFragment extends Fragment implements FilmListAdapter.IOnItemClickListener {
+public class FilmListFragment extends BaseFragment implements FilmListAdapter.IOnItemClickListener {
     View view;
     @BindView(R.id.rvFilmList)
     RecyclerView mRecyclerView;
 
     @Inject
-    FilmListAdapter mAdapter;
-
-    @Inject
-    FilmListViewModel mViewModel;
+    protected FilmListAdapter mAdapter;
 
     private String mScopeName;
 
@@ -54,14 +52,6 @@ public class FilmListFragment extends Fragment implements FilmListAdapter.IOnIte
         return view;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mScopeName = context.getClass().getSimpleName() + "." + this.getClass().getSimpleName();
-        Scope scope = Toothpick.openScopes(context.getClass().getSimpleName(), mScopeName);
-        scope.installModules(new FilmListFragmentModule(this));
-        Toothpick.inject(this, scope);
-    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -72,11 +62,7 @@ public class FilmListFragment extends Fragment implements FilmListAdapter.IOnIte
         mViewModel.getFilmList().observe(this, list -> mAdapter.submitList(list));
     }
 
-    @Override
-    public void onDestroy() {
-        Toothpick.closeScope(mScopeName);
-        super.onDestroy();
-    }
+
 
     @Override
     public void OnItemClick(long id) {

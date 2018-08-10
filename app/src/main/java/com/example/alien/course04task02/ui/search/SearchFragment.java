@@ -9,8 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.alien.course04task02.R;
+import com.example.alien.course04task02.ui.common.BaseFragment;
 
-public class SearchFragment extends Fragment {
+public class SearchFragment extends BaseFragment {
     public static SearchFragment newInstance() {
 
         Bundle args = new Bundle();

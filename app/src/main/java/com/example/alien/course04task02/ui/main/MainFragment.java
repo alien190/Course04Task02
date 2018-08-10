@@ -12,9 +12,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.alien.course04task02.R;
+import com.example.alien.course04task02.ui.common.BaseFragment;
 import com.example.alien.course04task02.ui.search.SearchActivity;
 
-public class MainFragment extends Fragment {
+public class MainFragment extends BaseFragment {
 
     View view;
 
