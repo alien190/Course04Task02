@@ -2,11 +2,34 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvFilmList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        />
+        android:visibility="visible"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/ll_error"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_warning_black_96dp"
+            android:layout_gravity="center"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Пусто"
+            android:layout_gravity="center"
+            android:textSize="48sp"
+            android:textColor="@color/colorGray"/>
+
+    </LinearLayout>
 </LinearLayout>

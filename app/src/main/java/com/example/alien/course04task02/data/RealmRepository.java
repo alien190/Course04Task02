@@ -80,7 +80,9 @@ public class RealmRepository implements IRepository {
 
     @Override
     public List<Film> search(String query) {
-        return null;
+        query = "*." + query + "*.";
+        return mRealm.where(Film.class).like("name", query).findAll();
+
     }
 
     @Override

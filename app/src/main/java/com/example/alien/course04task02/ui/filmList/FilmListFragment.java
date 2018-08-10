@@ -1,33 +1,31 @@
 package com.example.alien.course04task02.ui.filmList;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.alien.course04task02.R;
-import com.example.alien.course04task02.di.FilmListFragmentModule;
 import com.example.alien.course04task02.ui.common.BaseFragment;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import toothpick.Scope;
-import toothpick.Toothpick;
 
 public class FilmListFragment extends BaseFragment implements FilmListAdapter.IOnItemClickListener {
     View view;
     @BindView(R.id.rvFilmList)
     RecyclerView mRecyclerView;
+
+    @BindView(R.id.ll_error)
+    LinearLayout mErrorLayout;
 
     @Inject
     protected FilmListAdapter mAdapter;
@@ -60,8 +58,16 @@ public class FilmListFragment extends BaseFragment implements FilmListAdapter.IO
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mAdapter);
         mViewModel.getFilmList().observe(this, list -> mAdapter.submitList(list));
+        mViewModel.getIsEmpty().observe(this, isEmpty -> {
+            if (isEmpty != null && !isEmpty) {
+                mRecyclerView.setVisibility(View.VISIBLE);
+                mErrorLayout.setVisibility(View.GONE);
+            } else {
+                mRecyclerView.setVisibility(View.GONE);
+                mErrorLayout.setVisibility(View.VISIBLE);
+            }
+        });
     }
-
 
 
     @Override
