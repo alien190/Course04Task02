@@ -18,7 +18,6 @@ public class SearchActivity extends DoubleFragmentActivity {
     public static final int TYPE_SEARCH_BY_NAME = 1;
     private static final String TYPE_KEY = "SearchActivityTypeKey";
 
-
     @Inject
     SearchFragment mSearchFragment;
 
@@ -40,6 +39,8 @@ public class SearchActivity extends DoubleFragmentActivity {
 
     @Override
     protected Module getToothPickModule() {
-        return new SearchByNameActivityModule(this);
+        switch (getIntent().getIntExtra(TYPE_KEY, 0)) {
+            default: return new SearchByNameActivityModule(this);
+        }
     }
 }

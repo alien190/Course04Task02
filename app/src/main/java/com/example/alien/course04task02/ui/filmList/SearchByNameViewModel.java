@@ -14,6 +14,7 @@ public class SearchByNameViewModel extends BaseViewModel {
 
     public SearchByNameViewModel(IRepository repository) {
         super(repository);
+        searchByName();
     }
 
     public void searchByName() {
