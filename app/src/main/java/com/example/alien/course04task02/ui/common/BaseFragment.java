@@ -6,10 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 import com.example.alien.course04task02.di.FilmListFragmentModule;
-import com.example.alien.course04task02.ui.filmList.ListAllViewModel;
-import com.example.alien.course04task02.ui.search.SearchActivity;
-
-import javax.inject.Inject;
+import com.example.alien.course04task02.ui.main.MainActivity;
 
 import toothpick.Scope;
 import toothpick.Toothpick;
@@ -22,7 +19,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mParentScopeName = ((SearchActivity)context).getScopeName();
+        mParentScopeName = ((MainActivity)context).getScopeName();
     }
 
     @Override

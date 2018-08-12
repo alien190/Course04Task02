@@ -1,4 +1,4 @@
-package com.example.alien.course04task02.ui.search;
+package com.example.alien.course04task02.ui.main;
 
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
@@ -7,20 +7,17 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 
 import com.example.alien.course04task02.BR;
-import com.example.alien.course04task02.R;
 import com.example.alien.course04task02.databinding.MainBinding;
 import com.example.alien.course04task02.databinding.SearchByDirectorBinding;
 import com.example.alien.course04task02.databinding.SearchByNameBinding;
 import com.example.alien.course04task02.ui.common.BaseFragment;
 import com.example.alien.course04task02.ui.common.BaseViewModel;
-import com.example.alien.course04task02.ui.filmList.SearchByNameViewModel;
 
 import javax.inject.Inject;
 
-public class SearchFragment extends BaseFragment {
+public class MainFragment extends BaseFragment {
 
     @Inject
     protected BaseViewModel mViewModel;
@@ -30,11 +27,11 @@ public class SearchFragment extends BaseFragment {
     private ViewDataBinding mViewDataBinding;
 
 
-    public static SearchFragment newInstance() {
+    public static MainFragment newInstance() {
 
         Bundle args = new Bundle();
 
-        SearchFragment fragment = new SearchFragment();
+        MainFragment fragment = new MainFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -42,15 +39,15 @@ public class SearchFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-       // mSearchType = mSearchType != 0 ? mSearchType : SearchActivity.TYPE_SEARCH_BY_NAME;
+       // mSearchType = mSearchType != 0 ? mSearchType : MainActivity.TYPE_SEARCH_BY_NAME;
         // int layoutId;
 
         switch (mSearchType) {
-            case SearchActivity.TYPE_SEARCH_BY_DIRECTOR: {
+            case MainActivity.TYPE_SEARCH_BY_DIRECTOR: {
                 mViewDataBinding = SearchByDirectorBinding.inflate(inflater, container, false);
                 break;
             }
-            case SearchActivity.TYPE_SEARCH_BY_NAME: {
+            case MainActivity.TYPE_SEARCH_BY_NAME: {
                 mViewDataBinding = SearchByNameBinding.inflate(inflater, container, false);
                 break;
             }
@@ -67,6 +64,7 @@ public class SearchFragment extends BaseFragment {
     public void setSearchType(int mSearchType) {
         this.mSearchType = mSearchType;
     }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {

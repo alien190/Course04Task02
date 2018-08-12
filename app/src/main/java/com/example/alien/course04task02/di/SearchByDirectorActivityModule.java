@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.example.alien.course04task02.R;
 import com.example.alien.course04task02.ui.common.BaseViewModel;
 import com.example.alien.course04task02.ui.filmList.SearchByDirectorViewModel;
-import com.example.alien.course04task02.ui.search.SearchFragment;
+import com.example.alien.course04task02.ui.main.MainFragment;
 
 import toothpick.config.Module;
 
@@ -18,7 +18,7 @@ public class SearchByDirectorActivityModule extends Module {
     public SearchByDirectorActivityModule(AppCompatActivity activity) {
         mActivity = activity;
 
-        bind(SearchFragment.class).toInstance(SearchFragment.newInstance());
+        bind(MainFragment.class).toInstance(MainFragment.newInstance());
         bind(AppCompatActivity.class).toInstance(mActivity);
         //todo сделать интерфейсы
 

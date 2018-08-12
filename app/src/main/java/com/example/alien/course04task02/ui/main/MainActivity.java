@@ -1,4 +1,4 @@
-package com.example.alien.course04task02.ui.search;
+package com.example.alien.course04task02.ui.main;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +12,6 @@ import com.example.alien.course04task02.R;
 import com.example.alien.course04task02.di.MainActivityModule;
 import com.example.alien.course04task02.di.SearchByDirectorActivityModule;
 import com.example.alien.course04task02.di.SearchByNameActivityModule;
-import com.example.alien.course04task02.ui.common.DoubleFragmentActivity;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -21,14 +20,14 @@ import toothpick.Scope;
 import toothpick.Toothpick;
 import toothpick.config.Module;
 
-public class SearchActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     public static final int TYPE_SEARCH_BY_NAME = 1;
     public static final int TYPE_SEARCH_BY_DIRECTOR = 2;
     private static final String TYPE_KEY = "SearchActivityTypeKey";
 
     @Inject
-    SearchFragment mSearchFragment;
+    MainFragment mMainFragment;
 
     private int mSearchType;
 
@@ -65,15 +64,15 @@ public class SearchActivity extends AppCompatActivity {
 
     public static void startActivity(Context context, int type) {
         Intent intent = new Intent();
-        intent.setClass(context, SearchActivity.class);
+        intent.setClass(context, MainActivity.class);
         intent.putExtra(TYPE_KEY, type);
         context.startActivity(intent);
     }
 
 
     protected Fragment getFragment() {
-        mSearchFragment.setSearchType(getIntent().getIntExtra(TYPE_KEY, 0));
-        return mSearchFragment;
+        mMainFragment.setSearchType(getIntent().getIntExtra(TYPE_KEY, 0));
+        return mMainFragment;
     }
 
 
