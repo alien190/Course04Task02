@@ -35,9 +35,10 @@ public class ListAllFragment extends BaseFragment implements FilmListAdapter.IOn
     protected BaseViewModel mViewModel;
 
 
-    public static ListAllFragment newInstance() {
+    public static ListAllFragment newInstance(String parentScopeName) {
 
         Bundle args = new Bundle();
+        args.putString(KEY_PARENT_SCOPE_NAME, parentScopeName);
 
         ListAllFragment fragment = new ListAllFragment();
         fragment.setArguments(args);

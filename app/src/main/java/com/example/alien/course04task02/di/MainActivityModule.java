@@ -10,15 +10,10 @@ import com.example.alien.course04task02.ui.main.MainFragment;
 import toothpick.config.Module;
 
 
-public class MainActivityModule extends Module {
+public class MainActivityModule extends CommonActivityModule {
 
-    private AppCompatActivity mActivity;
-
-    public MainActivityModule(AppCompatActivity activity) {
-        mActivity = activity;
-
-        bind(MainFragment.class).toInstance(MainFragment.newInstance());
-        bind(AppCompatActivity.class).toInstance(mActivity);
+    public MainActivityModule(AppCompatActivity activity, String scopeName, int type) {
+        super(activity, scopeName, type);
         //todo сделать интерфейсы
         bind(BaseViewModel.class).toProvider(ListAllViewModelProvider.class).providesSingletonInScope();
         bind(Integer.class).withName("TitleId").toInstance(R.string.main_activity_title);

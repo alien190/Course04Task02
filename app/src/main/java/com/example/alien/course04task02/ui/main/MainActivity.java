@@ -12,6 +12,7 @@ import com.example.alien.course04task02.R;
 import com.example.alien.course04task02.di.MainActivityModule;
 import com.example.alien.course04task02.di.SearchByDirectorActivityModule;
 import com.example.alien.course04task02.di.SearchByNameActivityModule;
+import com.example.alien.course04task02.ui.filmList.ListAllFragment;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -28,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Inject
     MainFragment mMainFragment;
+
+    @Inject
+    ListAllFragment mListAllFragment;
 
     private int mSearchType;
 
@@ -46,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.ac_double_fragment);
         if (savedInstanceState == null) {
-            changeFragment(getFragment());
+            changeFragment();
         }
 
         setTitle(mTitleId);
@@ -71,16 +75,19 @@ public class MainActivity extends AppCompatActivity {
 
 
     protected Fragment getFragment() {
-        mMainFragment.setSearchType(getIntent().getIntExtra(TYPE_KEY, 0));
+//        mMainFragment.setSearchType(getIntent().getIntExtra(TYPE_KEY, 0));
+//        mMainFragment.setScopeName(mScopeName);
         return mMainFragment;
     }
 
 
-    protected void changeFragment(Fragment fragment) {
+    protected void changeFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer, fragment)
-                .addToBackStack(fragment.getClass().getSimpleName())
+                .replace(R.id.fragmentContainer, mMainFragment)
+                .addToBackStack(mMainFragment.getClass().getSimpleName())
+                .replace(R.id.fragmentListContainer, mListAllFragment)
+                .addToBackStack(mListAllFragment.getClass().getSimpleName())
                 .commit();
     }
 
@@ -94,21 +101,22 @@ public class MainActivity extends AppCompatActivity {
 
         Module module;
         mScopeName = this.getClass().getSimpleName() + ".";
+        int type = getIntent().getIntExtra(TYPE_KEY, 0);
 
-        switch (getIntent().getIntExtra(TYPE_KEY, 0)) {
+        switch (type) {
             case TYPE_SEARCH_BY_DIRECTOR: {
-                module = new SearchByDirectorActivityModule(this);
                 mScopeName = "SEARCH_BY_DIRECTOR_SCOPE";
+                module = new SearchByDirectorActivityModule(this, mScopeName, type);
                 break;
             }
             case TYPE_SEARCH_BY_NAME: {
-                module = new SearchByNameActivityModule(this);
                 mScopeName = "SEARCH_BY_NAME_SCOPE";
+                module = new SearchByNameActivityModule(this, mScopeName, type);
                 break;
             }
             default: {
-                module = new MainActivityModule(this);
                 mScopeName = "MAIN_SCOPE";
+                module = new MainActivityModule(this, mScopeName, type);
                 break;
             }
         }

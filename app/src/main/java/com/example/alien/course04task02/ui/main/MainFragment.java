@@ -19,6 +19,9 @@ import javax.inject.Inject;
 
 public class MainFragment extends BaseFragment {
 
+
+    private static final String KEY_TYPE = "KeyType";
+
     @Inject
     protected BaseViewModel mViewModel;
 
@@ -27,9 +30,11 @@ public class MainFragment extends BaseFragment {
     private ViewDataBinding mViewDataBinding;
 
 
-    public static MainFragment newInstance() {
+    public static MainFragment newInstance(String parentScopeName, int type) {
 
         Bundle args = new Bundle();
+        args.putString(KEY_PARENT_SCOPE_NAME, parentScopeName);
+        args.putInt(KEY_TYPE, type);
 
         MainFragment fragment = new MainFragment();
         fragment.setArguments(args);
@@ -41,6 +46,8 @@ public class MainFragment extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
        // mSearchType = mSearchType != 0 ? mSearchType : MainActivity.TYPE_SEARCH_BY_NAME;
         // int layoutId;
+
+        mSearchType = getArguments().getInt(KEY_TYPE, 0);
 
         switch (mSearchType) {
             case MainActivity.TYPE_SEARCH_BY_DIRECTOR: {
@@ -61,9 +68,9 @@ public class MainFragment extends BaseFragment {
         return mViewDataBinding.getRoot();
     }
 
-    public void setSearchType(int mSearchType) {
-        this.mSearchType = mSearchType;
-    }
+//    public void setSearchType(int mSearchType) {
+//        this.mSearchType = mSearchType;
+//    }
 
 
     @Override

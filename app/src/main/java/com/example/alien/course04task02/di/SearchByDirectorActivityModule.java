@@ -11,15 +11,12 @@ import com.example.alien.course04task02.ui.main.MainFragment;
 import toothpick.config.Module;
 
 
-public class SearchByDirectorActivityModule extends Module {
+public class SearchByDirectorActivityModule extends CommonActivityModule {
 
     private AppCompatActivity mActivity;
 
-    public SearchByDirectorActivityModule(AppCompatActivity activity) {
-        mActivity = activity;
-
-        bind(MainFragment.class).toInstance(MainFragment.newInstance());
-        bind(AppCompatActivity.class).toInstance(mActivity);
+    public SearchByDirectorActivityModule(AppCompatActivity activity, String scopeName, int type) {
+       super(activity, scopeName, type);
         //todo сделать интерфейсы
 
         bind(BaseViewModel.class).toProvider(SearchByDirectorViewModelProvider.class).providesSingletonInScope();
