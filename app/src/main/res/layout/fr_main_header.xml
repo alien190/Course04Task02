@@ -6,7 +6,15 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="btn"
-        android:id="@+id/btn_search"/>
+        android:text="name"
+        android:id="@+id/btn_name_search"/>
+
+    <Button
+        android:layout_toEndOf="@+id/btn_name_search"
+        android:layout_toRightOf="@+id/btn_name_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="director"
+        android:id="@+id/btn_director_search"/>
 </RelativeLayout>
 

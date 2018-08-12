@@ -36,11 +36,19 @@ public class MainFragment extends BaseFragment {
         view = inflater.inflate(R.layout.fr_main_header, container, false);
 
         //temporarily
-        Button btn = view.findViewById(R.id.btn_search);
-        btn.setOnClickListener(new View.OnClickListener() {
+        Button btnNameSearch = view.findViewById(R.id.btn_name_search);
+        btnNameSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SearchActivity.startActivity(getContext(), 1);
+            }
+        });
+
+        Button btnDirectorSearch = view.findViewById(R.id.btn_director_search);
+        btnDirectorSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SearchActivity.startActivity(getContext(), 2);
             }
         });
         return view;

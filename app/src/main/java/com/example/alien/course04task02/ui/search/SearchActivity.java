@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
+import com.example.alien.course04task02.di.SearchByDirectorActivityModule;
 import com.example.alien.course04task02.di.SearchByNameActivityModule;
 import com.example.alien.course04task02.ui.common.DoubleFragmentActivity;
 
@@ -16,6 +17,7 @@ import toothpick.config.Module;
 public class SearchActivity extends DoubleFragmentActivity {
 
     public static final int TYPE_SEARCH_BY_NAME = 1;
+    public static final int TYPE_SEARCH_BY_DIRECTOR = 2;
     private static final String TYPE_KEY = "SearchActivityTypeKey";
 
     @Inject
@@ -40,7 +42,10 @@ public class SearchActivity extends DoubleFragmentActivity {
     @Override
     protected Module getToothPickModule() {
         switch (getIntent().getIntExtra(TYPE_KEY, 0)) {
-            default: return new SearchByNameActivityModule(this);
+            case TYPE_SEARCH_BY_DIRECTOR:
+                return new SearchByDirectorActivityModule(this);
+            default:
+                return new SearchByNameActivityModule(this);
         }
     }
 }

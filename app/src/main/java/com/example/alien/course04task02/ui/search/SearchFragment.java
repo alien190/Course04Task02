@@ -11,8 +11,10 @@ import android.widget.EditText;
 
 import com.example.alien.course04task02.BR;
 import com.example.alien.course04task02.R;
+import com.example.alien.course04task02.databinding.SearchByDirectorBinding;
 import com.example.alien.course04task02.databinding.SearchByNameBinding;
 import com.example.alien.course04task02.ui.common.BaseFragment;
+import com.example.alien.course04task02.ui.common.BaseViewModel;
 import com.example.alien.course04task02.ui.filmList.SearchByNameViewModel;
 
 import javax.inject.Inject;
@@ -20,11 +22,12 @@ import javax.inject.Inject;
 public class SearchFragment extends BaseFragment {
 
     @Inject
-    protected SearchByNameViewModel mViewModel;
+    protected BaseViewModel mViewModel;
 
 
     private int mSearchType;
     private ViewDataBinding mViewDataBinding;
+
     private int mTitleId;
 
 
@@ -44,8 +47,8 @@ public class SearchFragment extends BaseFragment {
         // int layoutId;
 
         switch (mSearchType) {
-            case SearchActivity.TYPE_SEARCH_BY_NAME: {
-                mViewDataBinding = SearchByNameBinding.inflate(inflater, container, false);
+            case SearchActivity.TYPE_SEARCH_BY_DIRECTOR: {
+                mViewDataBinding = SearchByDirectorBinding.inflate(inflater, container, false);
                 mTitleId = R.string.name_search;
                 break;
             }

@@ -22,7 +22,7 @@ public class FilmListFragmentModule extends Module {
         }
 
 
-        bind(SearchByNameViewModel.class).toProvider(SearchByNameViewModelProvider.class).providesSingletonInScope();
+
         bind(Fragment.class).withName("ListAllFragment").toInstance(mFragment);
     }
 
