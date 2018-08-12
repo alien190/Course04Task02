@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <data class="MainBinding" >
-        <import type="com.example.alien.course04task02.ui.search.SearchActivity"/>
+    <data class="MainBinding">
+
+        <import type="com.example.alien.course04task02.ui.search.SearchActivity" />
 
     </data>
 
@@ -13,8 +14,17 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="@{(view) -> SearchActivity.startActivity(view.getContext(), 1)}"
-            android:text="name" />
+            android:onClick="@{(view) -> SearchActivity.startActivity(view.getContext(), SearchActivity.TYPE_SEARCH_BY_NAME)}"
+            android:text="name"
+            android:id="@+id/btn_name_search"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{(view) -> SearchActivity.startActivity(view.getContext(), SearchActivity.TYPE_SEARCH_BY_DIRECTOR)}"
+            android:text="director"
+            android:layout_toEndOf="@+id/btn_name_search"
+            android:layout_toRightOf="@+id/btn_name_search"/>
 
     </RelativeLayout>
 </layout>
