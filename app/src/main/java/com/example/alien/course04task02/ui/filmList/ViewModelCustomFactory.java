@@ -6,16 +6,19 @@ import android.support.annotation.NonNull;
 
 import com.example.alien.course04task02.data.IRepository;
 
-public class FilmListViewModelCustomFactory implements ViewModelProvider.Factory {
+public class ViewModelCustomFactory implements ViewModelProvider.Factory {
     private IRepository mRepository;
 
-    public FilmListViewModelCustomFactory(IRepository repository) {
+    public ViewModelCustomFactory(IRepository repository) {
         mRepository = repository;
     }
 
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        return (T) new FilmListViewModel(mRepository);
+        if(modelClass == SearchByNameViewModel.class) {
+            return (T) new SearchByNameViewModel(mRepository);
+        }
+        return (T) new ListAllViewModel(mRepository);
     }
 }

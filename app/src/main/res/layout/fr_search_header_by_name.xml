@@ -4,7 +4,7 @@
     <data class="SearchByNameBinding">
         <variable
             name="vm"
-            type="com.example.alien.course04task02.ui.filmList.FilmListViewModel"
+            type="com.example.alien.course04task02.ui.filmList.SearchByNameViewModel"
             />
     </data>
 
@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_search_black_24dp"
-            android:onClick="@{() -> vm.searchByName(vm.searchByNameQuery)}"
+            android:onClick="@{() -> vm.searchByName()}"
             android:id="@+id/btn_name_search"
             android:layout_margin="4dp"
             />

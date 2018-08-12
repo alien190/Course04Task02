@@ -7,10 +7,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.alien.course04task02.R;
-import com.example.alien.course04task02.di.DoubleFragmentActivityModule;
+import com.example.alien.course04task02.di.MainActivityModule;
+
+import java.util.List;
 
 import toothpick.Scope;
 import toothpick.Toothpick;
+import toothpick.config.Module;
 
 public abstract class DoubleFragmentActivity extends AppCompatActivity {
 
@@ -18,9 +21,10 @@ public abstract class DoubleFragmentActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        String scopeName = this.getClass().getSimpleName();
+
         Scope scope = Toothpick.openScopes("Application", this.getClass().getSimpleName());
-        scope.installModules(new DoubleFragmentActivityModule(this));
+        scope.installModules(getToothPickModule());
+
         Toothpick.inject(this, scope);
 
         setContentView(R.layout.ac_double_fragment);
@@ -54,4 +58,6 @@ public abstract class DoubleFragmentActivity extends AppCompatActivity {
         super.onDestroy();
        // Toothpick.closeScope(this.getClass().getSimpleName());
     }
+
+    protected abstract Module getToothPickModule();
 }

@@ -1,32 +1,26 @@
 package com.example.alien.course04task02.ui.filmList;
 
 import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
-import android.text.Editable;
-import android.text.TextWatcher;
 
 import com.example.alien.course04task02.data.IRepository;
 import com.example.alien.course04task02.data.model.Film;
 import com.example.alien.course04task02.ui.common.BaseViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-public class FilmListViewModel extends BaseViewModel {
+public class SearchByNameViewModel extends BaseViewModel {
 
     private MutableLiveData<String> mSearchByNameQuery = new MutableLiveData<>();
 
-    public FilmListViewModel(IRepository repository) {
+    public SearchByNameViewModel(IRepository repository) {
         super(repository);
-        mSearchByNameQuery.setValue("dsadas");
-        // mRepository.createFilmAndSave("meg", "Джон Тёртелтауб", 2018, 5.0);
     }
 
-
-    public void searchByName(String query) {
+    public void searchByName() {
+        //todo разобратся с падением при изменении списка объектов
         mFilmList.setValue(null);
-        mFilmList.setValue(mRepository.search(query));
+        List<Film> filmList = mRepository.search(mSearchByNameQuery.getValue());
+        mFilmList.setValue(filmList);
     }
 
     public MutableLiveData<String> getSearchByNameQuery() {
@@ -35,7 +29,7 @@ public class FilmListViewModel extends BaseViewModel {
 
     public void setSearchByNameQuery(CharSequence query) {
         this.mSearchByNameQuery.setValue(query.toString());
-        searchByName(query.toString());
+        searchByName();
     }
 
 }

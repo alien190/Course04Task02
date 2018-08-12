@@ -13,7 +13,7 @@ android:orientation="vertical">
 
 <fragment
     android:id="@+id/frFilmList"
-    android:name="com.example.alien.course04task02.ui.filmList.FilmListFragment"
+    android:name="com.example.alien.course04task02.ui.filmList.ListAllFragment"
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:layout_weight="1" />

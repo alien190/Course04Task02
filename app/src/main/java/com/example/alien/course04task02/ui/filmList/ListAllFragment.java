@@ -13,13 +13,14 @@ import android.widget.Toast;
 
 import com.example.alien.course04task02.R;
 import com.example.alien.course04task02.ui.common.BaseFragment;
+import com.example.alien.course04task02.ui.common.BaseViewModel;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class FilmListFragment extends BaseFragment implements FilmListAdapter.IOnItemClickListener {
+public class ListAllFragment extends BaseFragment implements FilmListAdapter.IOnItemClickListener {
     View view;
     @BindView(R.id.rvFilmList)
     RecyclerView mRecyclerView;
@@ -30,13 +31,15 @@ public class FilmListFragment extends BaseFragment implements FilmListAdapter.IO
     @Inject
     protected FilmListAdapter mAdapter;
 
-    private String mScopeName;
+    @Inject
+    protected BaseViewModel mViewModel;
 
-    public static FilmListFragment newInstance() {
+
+    public static ListAllFragment newInstance() {
 
         Bundle args = new Bundle();
 
-        FilmListFragment fragment = new FilmListFragment();
+        ListAllFragment fragment = new ListAllFragment();
         fragment.setArguments(args);
         return fragment;
     }

@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 import com.example.alien.course04task02.di.FilmListFragmentModule;
-import com.example.alien.course04task02.ui.filmList.FilmListViewModel;
+import com.example.alien.course04task02.ui.filmList.ListAllViewModel;
 
 import javax.inject.Inject;
 
@@ -14,8 +14,6 @@ import toothpick.Scope;
 import toothpick.Toothpick;
 
 public abstract class BaseFragment extends Fragment {
-    @Inject
-    protected FilmListViewModel mViewModel;
 
     private String mScopeName;
     private String mParentScopeName;

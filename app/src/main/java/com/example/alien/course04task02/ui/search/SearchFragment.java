@@ -13,8 +13,15 @@ import com.example.alien.course04task02.BR;
 import com.example.alien.course04task02.R;
 import com.example.alien.course04task02.databinding.SearchByNameBinding;
 import com.example.alien.course04task02.ui.common.BaseFragment;
+import com.example.alien.course04task02.ui.filmList.SearchByNameViewModel;
+
+import javax.inject.Inject;
 
 public class SearchFragment extends BaseFragment {
+
+    @Inject
+    protected SearchByNameViewModel mViewModel;
+
 
     private int mSearchType;
     private ViewDataBinding mViewDataBinding;

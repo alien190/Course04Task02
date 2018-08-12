@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
+import com.example.alien.course04task02.di.SearchByNameActivityModule;
 import com.example.alien.course04task02.ui.common.DoubleFragmentActivity;
 
 import javax.inject.Inject;
+
+import toothpick.config.Module;
 
 public class SearchActivity extends DoubleFragmentActivity {
 
@@ -33,5 +36,10 @@ public class SearchActivity extends DoubleFragmentActivity {
     protected Fragment getFragment() {
         mSearchFragment.setSearchType(getIntent().getIntExtra(TYPE_KEY, 0));
         return mSearchFragment;
+    }
+
+    @Override
+    protected Module getToothPickModule() {
+        return new SearchByNameActivityModule(this);
     }
 }

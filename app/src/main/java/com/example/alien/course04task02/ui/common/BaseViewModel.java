@@ -17,7 +17,6 @@ public abstract class BaseViewModel extends ViewModel {
     public BaseViewModel(IRepository repository) {
         this.mRepository = repository;
         mFilmList.observeForever(list -> mIsEmpty.setValue(!(list != null && !list.isEmpty())));
-        mFilmList.setValue(repository.getAll());
     }
     public MutableLiveData<List<Film>> getFilmList() {
         return mFilmList;
