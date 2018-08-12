@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 
 import com.example.alien.course04task02.di.FilmListFragmentModule;
 import com.example.alien.course04task02.ui.filmList.ListAllViewModel;
+import com.example.alien.course04task02.ui.search.SearchActivity;
 
 import javax.inject.Inject;
 
@@ -21,7 +22,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mParentScopeName = context.getClass().getSimpleName();
+        mParentScopeName = ((SearchActivity)context).getScopeName();
     }
 
     @Override

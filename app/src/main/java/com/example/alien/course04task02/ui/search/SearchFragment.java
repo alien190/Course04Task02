@@ -11,6 +11,7 @@ import android.widget.EditText;
 
 import com.example.alien.course04task02.BR;
 import com.example.alien.course04task02.R;
+import com.example.alien.course04task02.databinding.MainBinding;
 import com.example.alien.course04task02.databinding.SearchByDirectorBinding;
 import com.example.alien.course04task02.databinding.SearchByNameBinding;
 import com.example.alien.course04task02.ui.common.BaseFragment;
@@ -41,7 +42,7 @@ public class SearchFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mSearchType = mSearchType != 0 ? mSearchType : SearchActivity.TYPE_SEARCH_BY_NAME;
+       // mSearchType = mSearchType != 0 ? mSearchType : SearchActivity.TYPE_SEARCH_BY_NAME;
         // int layoutId;
 
         switch (mSearchType) {
@@ -49,8 +50,13 @@ public class SearchFragment extends BaseFragment {
                 mViewDataBinding = SearchByDirectorBinding.inflate(inflater, container, false);
                 break;
             }
-            default: {
+            case SearchActivity.TYPE_SEARCH_BY_NAME: {
                 mViewDataBinding = SearchByNameBinding.inflate(inflater, container, false);
+                break;
+            }
+            default: {
+                mViewDataBinding = MainBinding.inflate(inflater, container, false);
+                mSearchType = 0;
                 break;
             }
         }
