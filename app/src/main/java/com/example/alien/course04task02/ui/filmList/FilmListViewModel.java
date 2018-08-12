@@ -17,24 +17,6 @@ public class FilmListViewModel extends BaseViewModel {
 
     private MutableLiveData<String> mSearchByNameQuery = new MutableLiveData<>();
 
-
-    public TextWatcher watcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            mSearchByNameQuery.setValue(charSequence.toString());
-        }
-
-        @Override
-        public void afterTextChanged(Editable editable) {
-
-        }
-    };
-
     public FilmListViewModel(IRepository repository) {
         super(repository);
         mSearchByNameQuery.setValue("dsadas");
@@ -42,13 +24,10 @@ public class FilmListViewModel extends BaseViewModel {
     }
 
 
-
     public void searchByName(String query) {
         mFilmList.setValue(null);
         mFilmList.setValue(mRepository.search(query));
-        //mIsEmpty.setValue(true);
     }
-
 
     public MutableLiveData<String> getSearchByNameQuery() {
         return mSearchByNameQuery;
@@ -59,7 +38,4 @@ public class FilmListViewModel extends BaseViewModel {
         searchByName(query.toString());
     }
 
-    public TextWatcher getWatcher() {
-        return watcher;
-    }
 }
