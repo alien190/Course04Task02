@@ -11,11 +11,19 @@ import com.example.alien.course04task02.di.MainActivityModule;
 
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import toothpick.Scope;
 import toothpick.Toothpick;
 import toothpick.config.Module;
 
 public abstract class DoubleFragmentActivity extends AppCompatActivity {
+
+    @Inject
+    @Named("TitleId")
+    protected Integer mTitleId;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,6 +39,8 @@ public abstract class DoubleFragmentActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             changeFragment(getFragment());
         }
+
+        setTitle(mTitleId);
     }
 
     protected abstract Fragment getFragment();
@@ -60,4 +70,5 @@ public abstract class DoubleFragmentActivity extends AppCompatActivity {
     }
 
     protected abstract Module getToothPickModule();
+
 }

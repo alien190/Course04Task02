@@ -23,7 +23,7 @@ public class FilmListFragmentModule extends Module {
 
 
 
-        bind(Fragment.class).withName("ListAllFragment").toInstance(mFragment);
+       // bind(Fragment.class).withName("ListAllFragment").toInstance(mFragment);
     }
 
 

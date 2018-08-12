@@ -28,8 +28,6 @@ public class SearchFragment extends BaseFragment {
     private int mSearchType;
     private ViewDataBinding mViewDataBinding;
 
-    private int mTitleId;
-
 
     public static SearchFragment newInstance() {
 
@@ -49,12 +47,10 @@ public class SearchFragment extends BaseFragment {
         switch (mSearchType) {
             case SearchActivity.TYPE_SEARCH_BY_DIRECTOR: {
                 mViewDataBinding = SearchByDirectorBinding.inflate(inflater, container, false);
-                mTitleId = R.string.name_search;
                 break;
             }
             default: {
                 mViewDataBinding = SearchByNameBinding.inflate(inflater, container, false);
-                mTitleId = R.string.name_search;
                 break;
             }
         }
@@ -70,7 +66,6 @@ public class SearchFragment extends BaseFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewDataBinding.setVariable(BR.vm, mViewModel);
-        if (getActivity() != null) getActivity().setTitle(mTitleId);
 
     }
 }
