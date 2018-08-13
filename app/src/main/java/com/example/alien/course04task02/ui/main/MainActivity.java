@@ -35,8 +35,6 @@ public class MainActivity extends AppCompatActivity {
     @Inject
     ListAllFragment mListAllFragment;
 
-    private int mSearchType;
-
     @Inject
     @Named("TitleId")
     protected Integer mTitleId;
@@ -73,13 +71,6 @@ public class MainActivity extends AppCompatActivity {
         intent.setClass(context, MainActivity.class);
         intent.putExtra(TYPE_KEY, type);
         context.startActivity(intent);
-    }
-
-
-    protected Fragment getFragment() {
-//        mMainFragment.setSearchType(getIntent().getIntExtra(TYPE_KEY, 0));
-//        mMainFragment.setScopeName(mScopeName);
-        return mMainFragment;
     }
 
 
