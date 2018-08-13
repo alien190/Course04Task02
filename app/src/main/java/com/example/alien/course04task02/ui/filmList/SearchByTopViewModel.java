@@ -16,12 +16,12 @@ public class SearchByTopViewModel extends BaseViewModel {
 
     public SearchByTopViewModel(IRepository repository) {
         super(repository);
-        searchByYear();
+        searchByTop();
     }
 
-    public void searchByYear() {
+    public void searchByTop() {
         //todo разобратся с падением при изменении списка объектов
-       // mFilmList.setValue(null);
+        mFilmList.setValue(null);
         int count = 0;
         try {
             count = Integer.valueOf(mSearchByTopQuery.getValue());
@@ -39,7 +39,7 @@ public class SearchByTopViewModel extends BaseViewModel {
 
     public void setSearchByTopQuery(CharSequence query) {
         this.mSearchByTopQuery.setValue(query.toString());
-        searchByYear();
+        searchByTop();
     }
 
 }

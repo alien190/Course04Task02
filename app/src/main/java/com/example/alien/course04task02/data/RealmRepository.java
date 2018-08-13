@@ -94,7 +94,11 @@ public class RealmRepository implements IRepository {
 
     @Override
     public List<Film> searchInBounds(int startYear, int endYear) {
-        return null;
+        if (endYear == 0) {
+            return mRealm.where(Film.class).equalTo("year", startYear).findAll();
+        } else {
+            return mRealm.where(Film.class).between("year", startYear, endYear).findAll();
+        }
     }
 
     @Override
