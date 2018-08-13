@@ -113,10 +113,10 @@ public class MainFragment extends BaseFragment {
             case R.id.mi_generate: {
 
                 String json = "";
-                InputStream is;
-                AssetManager am = getContext().getAssets();
+
                 try {
-                    is = am.open("filmList.json");
+                    AssetManager am = getContext().getAssets();
+                    InputStream is = am.open("filmList.json");
                     try (Scanner s = new Scanner(is).useDelimiter("\\A")) {
                         json = s.hasNext() ? s.next() : "";
                     }
@@ -126,7 +126,26 @@ public class MainFragment extends BaseFragment {
                 mViewModel.generateData(json);
                 return true;
             }
+            case R.id.mi_add: {
 
+            }
+
+            case R.id.mi_search_by_name: {
+                MainActivity.startActivity(getContext(), MainActivity.TYPE_SEARCH_BY_NAME);
+                return true;
+            }
+            case R.id.mi_search_by_year: {
+                MainActivity.startActivity(getContext(), MainActivity.TYPE_SEARCH_BY_YEAR);
+                return true;
+            }
+            case R.id.mi_search_by_director: {
+                MainActivity.startActivity(getContext(), MainActivity.TYPE_SEARCH_BY_DIRECTOR);
+                return true;
+            }
+            case R.id.mi_search_by_top: {
+                MainActivity.startActivity(getContext(), MainActivity.TYPE_SEARCH_BY_TOP);
+                return true;
+            }
             default:
                 return false;
         }

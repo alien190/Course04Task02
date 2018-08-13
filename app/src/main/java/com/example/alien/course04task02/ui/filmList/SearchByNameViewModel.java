@@ -22,7 +22,7 @@ public class SearchByNameViewModel extends BaseViewModel {
         //todo разобратся с падением при изменении списка объектов
         //mFilmList.setValue(null);
         List<Film> filmList = mRepository.search(mSearchByNameQuery.getValue());
-        mFilmList.setValue(filmList);
+        mFilmList.postValue(filmList);
     }
 
     public MutableLiveData<String> getSearchByNameQuery() {

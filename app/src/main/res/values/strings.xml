@@ -9,4 +9,10 @@
     <string name="name_search_hint">Название (мин. 3 символа)</string>
     <string name="top_search_hint">Количество фильмов</string>
     <string name="year_search_hint">2018 или 2010-2020 или 2010 2020</string>
+    <string name="mi_generate">Запонить базу</string>
+    <string name="mi_add">Добавить фильм</string>
+    <string name="mi_search_by_name">Поиск по наименованию</string>
+    <string name="mi_search_by_year">Поиск по году</string>
+    <string name="mi_search_by_director">Поиск по режиссеру</string>
+    <string name="mi_search_by_top">Топ фильмов по рейтингу</string>
 </resources>

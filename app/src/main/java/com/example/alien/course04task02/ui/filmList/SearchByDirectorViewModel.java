@@ -22,7 +22,7 @@ public class SearchByDirectorViewModel extends BaseViewModel {
         //todo разобратся с падением при изменении списка объектов
         //mFilmList.setValue(null);
         List<Film> filmList = mRepository.searchByDirector(mSearchByDirectorQuery.getValue());
-        mFilmList.setValue(filmList);
+        mFilmList.postValue(filmList);
     }
 
     public MutableLiveData<String> getSearchByDirectorQuery() {

@@ -31,7 +31,7 @@ public class SearchByYearViewModel extends BaseViewModel {
         //mFilmList.setValue(null);
         Pair<Integer, Integer> parseResult = parseYearQuery();
         List<Film> filmList = mRepository.searchInBounds(parseResult.first, parseResult.second);
-        mFilmList.setValue(filmList);
+        mFilmList.postValue(filmList);
     }
 
     public MutableLiveData<String> getSearchByYearQuery() {

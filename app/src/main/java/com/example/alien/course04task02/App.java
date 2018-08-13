@@ -1,6 +1,7 @@
 package com.example.alien.course04task02;
 
 import android.app.Application;
+import android.widget.Toast;
 
 import com.example.alien.course04task02.di.ApplicationModule;
 
@@ -29,5 +30,8 @@ public class App extends Application {
         scope.installModules(new ApplicationModule());
 
         Timber.plant(new Timber.DebugTree());
+
+
+        Toast.makeText(this, "dddd", Toast.LENGTH_LONG).show();
     }
 }

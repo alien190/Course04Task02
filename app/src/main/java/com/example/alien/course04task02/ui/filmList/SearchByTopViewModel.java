@@ -17,6 +17,7 @@ public class SearchByTopViewModel extends BaseViewModel {
 
     public SearchByTopViewModel(IRepository repository, Gson gson) {
         super(repository, gson);
+        mSearchByTopQuery.postValue("0");
         searchByTop();
     }
 
@@ -31,7 +32,7 @@ public class SearchByTopViewModel extends BaseViewModel {
         }
 
         List<Film> filmList = mRepository.getTopFilms(count);
-        mFilmList.setValue(filmList);
+        mFilmList.postValue(filmList);
     }
 
     public MutableLiveData<String> getSearchByTopQuery() {
