@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.alien.course04task02.R;
+import com.example.alien.course04task02.databinding.FilmDetailBinding;
 import com.example.alien.course04task02.di.FilmListFragmentModule;
 
 import javax.inject.Inject;
@@ -20,6 +21,8 @@ public class FilmDetailFragment extends Fragment {
 
     @Inject
     FilmDetailViewModel mViewModel;
+
+    private FilmDetailBinding mFilmDetailBinding;
 
     public static FilmDetailFragment newInstance() {
 
@@ -33,7 +36,8 @@ public class FilmDetailFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fr_detail_fragment, container, false);
+        mFilmDetailBinding = FilmDetailBinding.inflate(inflater, container, false);
+        return mFilmDetailBinding.getRoot();
     }
 
     @Override
@@ -42,5 +46,10 @@ public class FilmDetailFragment extends Fragment {
 
         Scope scope = Toothpick.openScopes(getActivity().getClass().getSimpleName());
         Toothpick.inject(this, scope);
+
+        mFilmDetailBinding.setVm(mViewModel);
+        mViewModel.getIsSaved().observe(this, saved -> {
+            if (saved != null && saved) getActivity().onBackPressed();
+        });
     }
 }
