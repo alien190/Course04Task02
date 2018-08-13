@@ -3,4 +3,5 @@
     <string name="name_search_title">Поиск по названию</string>
     <string name="director_search_title">Поиск по имени режисера</string>
     <string name="main_activity_title">Фильмы</string>
+    <string name="year_search_title">Поиск по году выпуска</string>
 </resources>

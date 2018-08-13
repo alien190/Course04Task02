@@ -12,6 +12,7 @@ import com.example.alien.course04task02.BR;
 import com.example.alien.course04task02.databinding.MainBinding;
 import com.example.alien.course04task02.databinding.SearchByDirectorBinding;
 import com.example.alien.course04task02.databinding.SearchByNameBinding;
+import com.example.alien.course04task02.databinding.SearchByYearBinding;
 import com.example.alien.course04task02.ui.common.BaseFragment;
 import com.example.alien.course04task02.ui.common.BaseViewModel;
 
@@ -56,6 +57,10 @@ public class MainFragment extends BaseFragment {
             }
             case MainActivity.TYPE_SEARCH_BY_NAME: {
                 mViewDataBinding = SearchByNameBinding.inflate(inflater, container, false);
+                break;
+            }
+            case MainActivity.TYPE_SEARCH_BY_YEAR: {
+                mViewDataBinding = SearchByYearBinding.inflate(inflater, container, false);
                 break;
             }
             default: {

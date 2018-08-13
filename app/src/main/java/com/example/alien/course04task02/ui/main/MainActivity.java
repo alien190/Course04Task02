@@ -12,6 +12,7 @@ import com.example.alien.course04task02.R;
 import com.example.alien.course04task02.di.MainActivityModule;
 import com.example.alien.course04task02.di.SearchByDirectorActivityModule;
 import com.example.alien.course04task02.di.SearchByNameActivityModule;
+import com.example.alien.course04task02.di.SearchByYearActivityModule;
 import com.example.alien.course04task02.ui.filmList.ListAllFragment;
 
 import javax.inject.Inject;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final int TYPE_SEARCH_BY_NAME = 1;
     public static final int TYPE_SEARCH_BY_DIRECTOR = 2;
+    public static final int TYPE_SEARCH_BY_YEAR = 3;
     private static final String TYPE_KEY = "SearchActivityTypeKey";
 
     @Inject
@@ -112,6 +114,11 @@ public class MainActivity extends AppCompatActivity {
             case TYPE_SEARCH_BY_NAME: {
                 mScopeName = "SEARCH_BY_NAME_SCOPE";
                 module = new SearchByNameActivityModule(this, mScopeName, type);
+                break;
+            }
+            case TYPE_SEARCH_BY_YEAR: {
+                mScopeName = "SEARCH_BY_YEAR_SCOPE";
+                module = new SearchByYearActivityModule(this, mScopeName, type);
                 break;
             }
             default: {

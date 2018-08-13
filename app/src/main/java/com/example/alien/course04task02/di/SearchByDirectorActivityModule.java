@@ -13,7 +13,6 @@ import toothpick.config.Module;
 
 public class SearchByDirectorActivityModule extends CommonActivityModule {
 
-    private AppCompatActivity mActivity;
 
     public SearchByDirectorActivityModule(AppCompatActivity activity, String scopeName, int type) {
        super(activity, scopeName, type);
