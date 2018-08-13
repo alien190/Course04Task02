@@ -21,6 +21,7 @@ import com.example.alien.course04task02.databinding.SearchByTopBinding;
 import com.example.alien.course04task02.databinding.SearchByYearBinding;
 import com.example.alien.course04task02.ui.common.BaseFragment;
 import com.example.alien.course04task02.ui.common.BaseViewModel;
+import com.example.alien.course04task02.ui.filmDetail.FilmDetailActivity;
 import com.google.gson.Gson;
 
 import java.io.InputStream;
@@ -127,7 +128,8 @@ public class MainFragment extends BaseFragment {
                 return true;
             }
             case R.id.mi_add: {
-
+                FilmDetailActivity.startActivity(getContext());
+                return true;
             }
 
             case R.id.mi_search_by_name: {
