@@ -7,6 +7,7 @@ import java.util.List;
 public interface IRepository {
 
     long insertItem(Film film);
+    void insertItems(List<Film> films);
 
     Film getItem(long id);
 

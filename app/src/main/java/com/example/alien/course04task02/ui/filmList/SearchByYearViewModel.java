@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import com.example.alien.course04task02.data.IRepository;
 import com.example.alien.course04task02.data.model.Film;
 import com.example.alien.course04task02.ui.common.BaseViewModel;
+import com.google.gson.Gson;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -20,8 +21,8 @@ public class SearchByYearViewModel extends BaseViewModel {
 
     private MutableLiveData<String> mSearchByYearQuery = new MutableLiveData<>();
 
-    public SearchByYearViewModel(IRepository repository) {
-        super(repository);
+    public SearchByYearViewModel(IRepository repository, Gson gson) {
+        super(repository, gson);
         searchByYear();
     }
 

@@ -1,5 +1,6 @@
 package com.example.alien.course04task02.ui.main;
 
+import android.content.res.AssetManager;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,8 +21,14 @@ import com.example.alien.course04task02.databinding.SearchByTopBinding;
 import com.example.alien.course04task02.databinding.SearchByYearBinding;
 import com.example.alien.course04task02.ui.common.BaseFragment;
 import com.example.alien.course04task02.ui.common.BaseViewModel;
+import com.google.gson.Gson;
+
+import java.io.InputStream;
+import java.util.Scanner;
 
 import javax.inject.Inject;
+
+import timber.log.Timber;
 
 public class MainFragment extends BaseFragment {
 
@@ -50,7 +57,7 @@ public class MainFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-       // mSearchType = mSearchType != 0 ? mSearchType : MainActivity.TYPE_SEARCH_BY_NAME;
+        // mSearchType = mSearchType != 0 ? mSearchType : MainActivity.TYPE_SEARCH_BY_NAME;
         // int layoutId;
 
         mSearchType = getArguments().getInt(KEY_TYPE, 0);
@@ -104,12 +111,24 @@ public class MainFragment extends BaseFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.mi_generate: {
-                mViewModel.generateData();
 
+                String json = "";
+                InputStream is;
+                AssetManager am = getContext().getAssets();
+                try {
+                    is = am.open("filmList.json");
+                    try (Scanner s = new Scanner(is).useDelimiter("\\A")) {
+                        json = s.hasNext() ? s.next() : "";
+                    }
+                } catch (Throwable t) {
+                    Timber.d(t);
+                }
+                mViewModel.generateData(json);
                 return true;
             }
 
-            default: return false;
+            default:
+                return false;
         }
     }
 }

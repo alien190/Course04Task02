@@ -5,6 +5,7 @@ import android.arch.lifecycle.MutableLiveData;
 import com.example.alien.course04task02.data.IRepository;
 import com.example.alien.course04task02.data.model.Film;
 import com.example.alien.course04task02.ui.common.BaseViewModel;
+import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -12,8 +13,8 @@ public class SearchByNameViewModel extends BaseViewModel {
 
     private MutableLiveData<String> mSearchByNameQuery = new MutableLiveData<>();
 
-    public SearchByNameViewModel(IRepository repository) {
-        super(repository);
+    public SearchByNameViewModel(IRepository repository, Gson gson) {
+        super(repository, gson);
         searchByName();
     }
 

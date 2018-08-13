@@ -43,6 +43,13 @@ public class RealmRepository implements IRepository {
     }
 
     @Override
+    public void insertItems(List<Film> films) {
+        for (Film film : films) {
+            insertItem(film);
+        }
+    }
+
+    @Override
     public Film getItem(long id) {
         Film film = getFilmById(id);
         return film != null ? mRealm.copyFromRealm(film) : null;
