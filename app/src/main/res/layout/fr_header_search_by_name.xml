@@ -17,21 +17,10 @@
             android:id="@+id/et_name_query"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@+id/btn_name_search"
-            android:layout_toStartOf="@+id/btn_name_search"
             android:layout_margin="4dp"
             android:text="@{vm.searchByNameQuery}"
-            android:onTextChanged="@{(text, start, before, count) -> vm.setSearchByNameQuery(text)}"/>
+            android:onTextChanged="@{(text, start, before, count) -> vm.setSearchByNameQuery(text)}"
+            android:hint="@string/name_search_hint"/>
 
-        <ImageButton
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_search_black_24dp"
-            android:onClick="@{() -> vm.searchByName()}"
-            android:id="@+id/btn_name_search"
-            android:layout_margin="4dp"
-            />
     </RelativeLayout>
 </layout>

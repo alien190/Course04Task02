@@ -19,8 +19,8 @@
             android:layout_alignParentLeft="true"
             android:layout_margin="4dp"
             android:text="@{vm.searchByTopQuery}"
-
-            android:onTextChanged="@{(text, start, before, count) -> vm.setSearchByTopQuery(text)}"/>
+            android:onTextChanged="@{(text, start, before, count) -> vm.setSearchByTopQuery(text)}"
+            android:hint="@string/top_search_hint"/>
 
     </RelativeLayout>
 </layout>

@@ -19,8 +19,8 @@
             android:layout_alignParentLeft="true"
             android:layout_margin="4dp"
             android:text="@{vm.searchByYearQuery}"
-
-            android:onTextChanged="@{(text, start, before, count) -> vm.setSearchByYearQuery(text)}"/>
+            android:onTextChanged="@{(text, start, before, count) -> vm.setSearchByYearQuery(text)}"
+            android:hint="@string/year_search_hint"/>
 
     </RelativeLayout>
 </layout>

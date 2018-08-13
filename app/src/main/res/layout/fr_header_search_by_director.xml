@@ -19,7 +19,8 @@
             android:layout_alignParentLeft="true"
             android:layout_margin="4dp"
             android:text="@{vm.searchByDirectorQuery}"
-            android:onTextChanged="@{(text, start, before, count) -> vm.setSearchByDirectorQuery(text)}"/>
+            android:onTextChanged="@{(text, start, before, count) -> vm.setSearchByDirectorQuery(text)}"
+            android:hint="@string/director_search_hint"/>
 
     </RelativeLayout>
 </layout>

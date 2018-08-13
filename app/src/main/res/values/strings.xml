@@ -5,4 +5,8 @@
     <string name="main_activity_title">Фильмы</string>
     <string name="year_search_title">Поиск по году выпуска</string>
     <string name="top_search_title">Список по рейтингу</string>
+    <string name="director_search_hint">Режиссер (мин. 4 символа)</string>
+    <string name="name_search_hint">Название (мин. 3 символа)</string>
+    <string name="top_search_hint">Количество фильмов</string>
+    <string name="year_search_hint">2018 или 2010-2020 или 2010 2020</string>
 </resources>
