@@ -2,13 +2,18 @@ package com.example.alien.course04task02.data;
 
 import com.example.alien.course04task02.data.model.Film;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
+import io.realm.Case;
 import io.realm.Realm;
+import io.realm.RealmResults;
 import io.realm.Sort;
 
 public class RealmRepository implements IRepository {
+    public static final int MIN_LENGTH_FOR_NAME_SEARCH = 3;
+    public static final int MIN_LENGTH_FOR_DIRECTOR_SEARCH = 4;
     private AtomicLong currentId = new AtomicLong();
     private Realm mRealm;
 
@@ -80,9 +85,11 @@ public class RealmRepository implements IRepository {
 
     @Override
     public List<Film> search(String query) {
-        // query = "*." + query + "*.";
-        return mRealm.where(Film.class).like("name", query).findAll();
-
+        if (query != null && query.length() >= MIN_LENGTH_FOR_NAME_SEARCH) {
+            query = "*" + query + "*";
+            return mRealm.where(Film.class).like("name", query, Case.INSENSITIVE).findAll();
+        }
+        return new ArrayList<>();
     }
 
     @Override
@@ -92,11 +99,24 @@ public class RealmRepository implements IRepository {
 
     @Override
     public List<Film> searchByDirector(String name) {
-        return mRealm.where(Film.class).like("director", name).findAll();
+        if (name != null && name.length() >= MIN_LENGTH_FOR_DIRECTOR_SEARCH) {
+            return mRealm.where(Film.class).beginsWith("director", name, Case.INSENSITIVE).findAll();
+        }
+        return new ArrayList<>();
     }
 
     @Override
     public List<Film> getTopFilms(int count) {
-        return null;
+
+        List<Film> retList = new ArrayList<>();
+
+        RealmResults<Film> results = mRealm.where(Film.class).sort("rating", Sort.DESCENDING).findAll();
+        for (Film film : results) {
+            if (retList.size() >= count) {
+                break;
+            }
+            retList.add(film);
+        }
+        return retList;
     }
 }

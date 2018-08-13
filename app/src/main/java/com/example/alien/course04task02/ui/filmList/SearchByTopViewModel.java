@@ -8,6 +8,8 @@ import com.example.alien.course04task02.ui.common.BaseViewModel;
 
 import java.util.List;
 
+import timber.log.Timber;
+
 public class SearchByTopViewModel extends BaseViewModel {
 
     private MutableLiveData<String> mSearchByTopQuery = new MutableLiveData<>();
@@ -19,8 +21,15 @@ public class SearchByTopViewModel extends BaseViewModel {
 
     public void searchByYear() {
         //todo разобратся с падением при изменении списка объектов
-        mFilmList.setValue(null);
-        List<Film> filmList = mRepository.searchByDirector(mSearchByTopQuery.getValue());
+       // mFilmList.setValue(null);
+        int count = 0;
+        try {
+            count = Integer.valueOf(mSearchByTopQuery.getValue());
+        } catch (Throwable t) {
+            Timber.d(t);
+        }
+
+        List<Film> filmList = mRepository.getTopFilms(count);
         mFilmList.setValue(filmList);
     }
 

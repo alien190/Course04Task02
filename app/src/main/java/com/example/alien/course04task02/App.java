@@ -5,11 +5,14 @@ import android.app.Application;
 import com.example.alien.course04task02.di.ApplicationModule;
 
 import io.realm.Realm;
+import timber.log.Timber;
 import toothpick.Scope;
 import toothpick.Toothpick;
 import toothpick.configuration.Configuration;
 import toothpick.registries.FactoryRegistryLocator;
 import toothpick.registries.MemberInjectorRegistryLocator;
+
+import static com.example.alien.course04task02.BuildConfig.DEBUG;
 
 public class App extends Application {
 
@@ -25,5 +28,6 @@ public class App extends Application {
         Scope scope = Toothpick.openScope("Application");
         scope.installModules(new ApplicationModule());
 
+        Timber.plant(new Timber.DebugTree());
     }
 }
