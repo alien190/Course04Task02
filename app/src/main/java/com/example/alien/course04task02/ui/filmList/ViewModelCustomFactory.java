@@ -25,6 +25,9 @@ public class ViewModelCustomFactory implements ViewModelProvider.Factory {
         if(modelClass == SearchByYearViewModel.class) {
             return (T) new SearchByYearViewModel(mRepository);
         }
+        if(modelClass == SearchByTopViewModel.class) {
+            return (T) new SearchByTopViewModel(mRepository);
+        }
         return (T) new ListAllViewModel(mRepository);
     }
 }
