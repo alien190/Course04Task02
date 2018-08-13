@@ -61,7 +61,7 @@ public class ListAllFragment extends BaseFragment implements FilmListAdapter.IOn
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mAdapter);
-        mViewModel.getFilmList().observe(this, list -> mAdapter.submitList(list));
+        mViewModel.getFilmList().observe(this, list -> {mAdapter.submitList(list); mAdapter.notifyDataSetChanged();});
         mViewModel.getIsEmpty().observe(this, isEmpty -> {
             if (isEmpty != null && !isEmpty) {
                 mRecyclerView.setVisibility(View.VISIBLE);

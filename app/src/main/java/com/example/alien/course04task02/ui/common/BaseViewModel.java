@@ -24,4 +24,12 @@ public abstract class BaseViewModel extends ViewModel {
     public MutableLiveData<Boolean> getIsEmpty() {
         return mIsEmpty;
     }
+
+    public void generateData(){
+
+
+
+        mRepository.createFilmAndSave("Фильм", "Режиссер", 2012, 7.5);
+    }
+
 }

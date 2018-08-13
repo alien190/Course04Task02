@@ -7,7 +7,7 @@ public class ListAllViewModel extends BaseViewModel {
 
     public ListAllViewModel(IRepository repository) {
         super(repository);
-        mFilmList.setValue(mRepository.getAll());
+        mRepository.getAllLive(list -> mFilmList.postValue(list));
     }
 
 }

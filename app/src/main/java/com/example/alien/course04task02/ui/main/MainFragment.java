@@ -5,10 +5,14 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.alien.course04task02.BR;
+import com.example.alien.course04task02.R;
 import com.example.alien.course04task02.databinding.MainBinding;
 import com.example.alien.course04task02.databinding.SearchByDirectorBinding;
 import com.example.alien.course04task02.databinding.SearchByNameBinding;
@@ -70,6 +74,7 @@ public class MainFragment extends BaseFragment {
             }
             default: {
                 mViewDataBinding = MainBinding.inflate(inflater, container, false);
+                setHasOptionsMenu(true);
                 mSearchType = 0;
                 break;
             }
@@ -88,5 +93,23 @@ public class MainFragment extends BaseFragment {
         super.onActivityCreated(savedInstanceState);
         mViewDataBinding.setVariable(BR.vm, mViewModel);
 
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.main_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.mi_generate: {
+                mViewModel.generateData();
+
+                return true;
+            }
+
+            default: return false;
+        }
     }
 }

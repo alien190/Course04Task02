@@ -7,7 +7,10 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 import io.realm.Case;
+import io.realm.OrderedCollectionChangeSet;
+import io.realm.OrderedRealmCollectionChangeListener;
 import io.realm.Realm;
+import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
 import io.realm.Sort;
 
@@ -16,6 +19,8 @@ public class RealmRepository implements IRepository {
     public static final int MIN_LENGTH_FOR_DIRECTOR_SEARCH = 4;
     private AtomicLong currentId = new AtomicLong();
     private Realm mRealm;
+
+    RealmResults<Film> realmResults;
 
     public RealmRepository() {
         mRealm = Realm.getDefaultInstance();
@@ -123,5 +128,14 @@ public class RealmRepository implements IRepository {
             retList.add(film);
         }
         return retList;
+    }
+
+    @Override
+    public void getAllLive(OnListChangeListener onListChangeListener) {
+        realmResults= mRealm.where(Film.class).findAllAsync().sort("id", Sort.ASCENDING);
+        realmResults.addChangeListener(films -> {
+            if(onListChangeListener!=null) onListChangeListener.onChange(films);
+        });
+        if(onListChangeListener!=null) onListChangeListener.onChange(realmResults);
     }
 }

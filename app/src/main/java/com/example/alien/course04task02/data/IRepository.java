@@ -14,6 +14,8 @@ public interface IRepository {
 
     List<Film> getAll();
 
+    void getAllLive(OnListChangeListener onListChangeListener);
+
     void updateItem(Film film);
 
     List<Film> search(String query);
@@ -26,4 +28,7 @@ public interface IRepository {
 
     public long createFilmAndSave(String name, String director, int year, double rating);
 
+    interface OnListChangeListener{
+        void onChange(List<Film> filmList);
+    }
 }
