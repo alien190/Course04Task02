@@ -87,7 +87,7 @@ public class RealmRepository implements IRepository {
     public List<Film> search(String query) {
         if (query != null && query.length() >= MIN_LENGTH_FOR_NAME_SEARCH) {
             query = "*" + query + "*";
-            return mRealm.where(Film.class).like("name", query, Case.INSENSITIVE).findAll();
+            return mRealm.copyFromRealm(mRealm.where(Film.class).like("name", query, Case.INSENSITIVE).findAll());
         }
         return new ArrayList<>();
     }
@@ -95,16 +95,16 @@ public class RealmRepository implements IRepository {
     @Override
     public List<Film> searchInBounds(int startYear, int endYear) {
         if (endYear == 0) {
-            return mRealm.where(Film.class).equalTo("year", startYear).findAll();
+            return mRealm.copyFromRealm(mRealm.where(Film.class).equalTo("year", startYear).findAll());
         } else {
-            return mRealm.where(Film.class).between("year", startYear, endYear).findAll();
+            return mRealm.copyFromRealm(mRealm.where(Film.class).between("year", startYear, endYear).findAll());
         }
     }
 
     @Override
     public List<Film> searchByDirector(String name) {
         if (name != null && name.length() >= MIN_LENGTH_FOR_DIRECTOR_SEARCH) {
-            return mRealm.where(Film.class).beginsWith("director", name, Case.INSENSITIVE).findAll();
+            return mRealm.copyFromRealm(mRealm.where(Film.class).beginsWith("director", name, Case.INSENSITIVE).findAll());
         }
         return new ArrayList<>();
     }
@@ -114,7 +114,8 @@ public class RealmRepository implements IRepository {
 
         List<Film> retList = new ArrayList<>();
 
-        RealmResults<Film> results = mRealm.where(Film.class).sort("rating", Sort.DESCENDING).findAll();
+
+        List<Film> results = mRealm.copyFromRealm(mRealm.where(Film.class).sort("rating", Sort.DESCENDING).findAll());
         for (Film film : results) {
             if (retList.size() >= count) {
                 break;

@@ -21,7 +21,7 @@ public class SearchByTopViewModel extends BaseViewModel {
 
     public void searchByTop() {
         //todo разобратся с падением при изменении списка объектов
-        mFilmList.setValue(null);
+        //mFilmList.setValue(null);
         int count = 0;
         try {
             count = Integer.valueOf(mSearchByTopQuery.getValue());

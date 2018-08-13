@@ -19,7 +19,7 @@ public class SearchByNameViewModel extends BaseViewModel {
 
     public void searchByName() {
         //todo разобратся с падением при изменении списка объектов
-        mFilmList.setValue(null);
+        //mFilmList.setValue(null);
         List<Film> filmList = mRepository.search(mSearchByNameQuery.getValue());
         mFilmList.setValue(filmList);
     }
