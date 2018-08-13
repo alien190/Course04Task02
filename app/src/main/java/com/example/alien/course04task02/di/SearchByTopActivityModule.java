@@ -5,8 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.alien.course04task02.R;
 import com.example.alien.course04task02.ui.common.BaseViewModel;
-import com.example.alien.course04task02.ui.filmList.SearchByNameViewModel;
-import com.example.alien.course04task02.ui.filmList.SearchByTopViewModel;
 
 
 public class SearchByTopActivityModule extends CommonActivityModule {

@@ -1,4 +1,4 @@
-package com.example.alien.course04task02.ui.filmList;
+package com.example.alien.course04task02.ui.search;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.support.v4.util.Pair;

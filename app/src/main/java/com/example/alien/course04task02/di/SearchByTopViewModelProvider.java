@@ -3,9 +3,8 @@ package com.example.alien.course04task02.di;
 import android.arch.lifecycle.ViewModelProviders;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.alien.course04task02.ui.filmList.SearchByTopViewModel;
-import com.example.alien.course04task02.ui.filmList.SearchByYearViewModel;
-import com.example.alien.course04task02.ui.filmList.ViewModelCustomFactory;
+import com.example.alien.course04task02.ui.search.SearchByTopViewModel;
+import com.example.alien.course04task02.ui.common.ViewModelCustomFactory;
 
 import javax.inject.Inject;
 import javax.inject.Provider;

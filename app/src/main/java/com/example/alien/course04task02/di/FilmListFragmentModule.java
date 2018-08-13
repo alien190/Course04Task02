@@ -4,8 +4,6 @@ package com.example.alien.course04task02.di;
 import android.support.v4.app.Fragment;
 
 import com.example.alien.course04task02.ui.filmList.FilmListAdapter;
-import com.example.alien.course04task02.ui.filmList.ListAllViewModel;
-import com.example.alien.course04task02.ui.filmList.SearchByNameViewModel;
 
 import toothpick.config.Module;
 

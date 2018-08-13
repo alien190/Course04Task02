@@ -1,7 +1,7 @@
 package com.example.alien.course04task02.di;
 
 import com.example.alien.course04task02.data.IRepository;
-import com.example.alien.course04task02.ui.filmList.ViewModelCustomFactory;
+import com.example.alien.course04task02.ui.common.ViewModelCustomFactory;
 import com.google.gson.Gson;
 
 import javax.inject.Inject;
