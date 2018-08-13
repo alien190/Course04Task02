@@ -16,7 +16,7 @@ public class SearchByTopActivityModule extends CommonActivityModule {
         super(activity, scopeName, type);
         //todo сделать интерфейсы
         bind(BaseViewModel.class).toProvider(SearchByTopViewModelProvider.class).providesSingletonInScope();
-        bind(SearchByTopViewModel.class).toProvider(SearchByTopViewModelProvider.class).providesSingletonInScope();
+        //bind(SearchByTopViewModel.class).toProvider(SearchByTopViewModelProvider.class).providesSingletonInScope();
         bind(Integer.class).withName("TitleId").toInstance(R.string.top_search_title);
     }
 

@@ -19,7 +19,7 @@ public class SearchByDirectorActivityModule extends CommonActivityModule {
         //todo сделать интерфейсы
 
         bind(BaseViewModel.class).toProvider(SearchByDirectorViewModelProvider.class).providesSingletonInScope();
-        bind(SearchByDirectorViewModel.class).toProvider(SearchByDirectorViewModelProvider.class).providesSingletonInScope();
+       // bind(SearchByDirectorViewModel.class).toProvider(SearchByDirectorViewModelProvider.class).providesSingletonInScope();
         bind(Integer.class).withName("TitleId").toInstance(R.string.director_search_title);
     }
 
