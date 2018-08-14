@@ -7,24 +7,19 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 import io.realm.Case;
-import io.realm.OrderedCollectionChangeSet;
-import io.realm.OrderedRealmCollection;
-import io.realm.OrderedRealmCollectionChangeListener;
 import io.realm.Realm;
-import io.realm.RealmChangeListener;
-import io.realm.RealmList;
 import io.realm.RealmResults;
 import io.realm.Sort;
 
-public class RealmRepository implements IRepository {
-    public static final int MIN_LENGTH_FOR_NAME_SEARCH = 3;
-    public static final int MIN_LENGTH_FOR_DIRECTOR_SEARCH = 4;
+public class RealmFilmRepository implements IFilmRepository {
+    private static final int MIN_LENGTH_FOR_NAME_SEARCH = 3;
+    private static final int MIN_LENGTH_FOR_DIRECTOR_SEARCH = 4;
     private AtomicLong currentId = new AtomicLong();
     private Realm mRealm;
 
     RealmResults<Film> realmResults;
 
-    public RealmRepository() {
+    public RealmFilmRepository() {
         mRealm = Realm.getDefaultInstance();
         Number number = mRealm.where(Film.class).max("id");
         if (number != null) {
@@ -112,8 +107,7 @@ public class RealmRepository implements IRepository {
     @Override
     public List<Film> searchByDirector(String name) {
         if (name == null || name.length() < MIN_LENGTH_FOR_DIRECTOR_SEARCH) {
-            //todo вот с этии нужно что-то придумать :)
-            name = "bla-bla-bla";
+            return mRealm.where(Film.class).like("director", "").findAll();
         }
         return mRealm.where(Film.class).beginsWith("director", name, Case.INSENSITIVE).findAll();
     }

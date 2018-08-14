@@ -4,15 +4,10 @@ import android.arch.lifecycle.MutableLiveData;
 import android.support.v4.util.Pair;
 import android.text.TextUtils;
 
-import com.example.alien.course04task02.data.IRepository;
-import com.example.alien.course04task02.data.model.Film;
+import com.example.alien.course04task02.data.IFilmRepository;
 import com.example.alien.course04task02.ui.common.BaseViewModel;
 import com.google.gson.Gson;
 
-import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
-import java.util.Timer;
 import java.util.regex.Pattern;
 
 import timber.log.Timber;
@@ -21,12 +16,12 @@ public class SearchByYearViewModel extends BaseViewModel {
 
     private MutableLiveData<String> mSearchByYearQuery = new MutableLiveData<>();
 
-    public SearchByYearViewModel(IRepository repository, Gson gson) {
+    public SearchByYearViewModel(IFilmRepository repository, Gson gson) {
         super(repository, gson);
         searchByYear();
     }
 
-    public void searchByYear() {
+    private void searchByYear() {
         Pair<Integer, Integer> parseResult = parseYearQuery();
         mFilmList.postValue(mRepository.searchInBounds(parseResult.first, parseResult.second));
     }

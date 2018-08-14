@@ -3,7 +3,7 @@ package com.example.alien.course04task02.ui.common;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
-import com.example.alien.course04task02.data.IRepository;
+import com.example.alien.course04task02.data.IFilmRepository;
 import com.example.alien.course04task02.data.model.Film;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -12,7 +12,6 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 import io.realm.OrderedRealmCollection;
-import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
 
 public abstract class BaseViewModel extends ViewModel {
@@ -20,11 +19,11 @@ public abstract class BaseViewModel extends ViewModel {
     protected OrderedRealmCollection<Film> data;
     private MutableLiveData<Boolean> mIsEmpty = new MutableLiveData<>();
 
-    protected IRepository mRepository;
+    protected IFilmRepository mRepository;
 
-    protected Gson mGson;
+    private Gson mGson;
 
-    public BaseViewModel(IRepository repository, Gson gson) {
+    public BaseViewModel(IFilmRepository repository, Gson gson) {
         this.mRepository = repository;
         this.mGson = gson;
         mFilmList.observeForever(list ->

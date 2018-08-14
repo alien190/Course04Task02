@@ -2,7 +2,7 @@ package com.example.alien.course04task02.ui.search;
 
 import android.arch.lifecycle.MutableLiveData;
 
-import com.example.alien.course04task02.data.IRepository;
+import com.example.alien.course04task02.data.IFilmRepository;
 import com.example.alien.course04task02.data.model.Film;
 import com.example.alien.course04task02.ui.common.BaseViewModel;
 import com.google.gson.Gson;
@@ -15,13 +15,13 @@ public class SearchByTopViewModel extends BaseViewModel {
 
     private MutableLiveData<String> mSearchByTopQuery = new MutableLiveData<>();
 
-    public SearchByTopViewModel(IRepository repository, Gson gson) {
+    public SearchByTopViewModel(IFilmRepository repository, Gson gson) {
         super(repository, gson);
        // mSearchByTopQuery.postValue("0");
         searchByTop();
     }
 
-    public void searchByTop() {
+    private void searchByTop() {
         int count = 0;
         try {
             count = Integer.valueOf(mSearchByTopQuery.getValue());

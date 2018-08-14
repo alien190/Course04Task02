@@ -6,7 +6,7 @@ import java.util.List;
 
 import io.realm.OrderedRealmCollection;
 
-public interface IRepository {
+public interface IFilmRepository {
 
     long insertItem(Film film);
 

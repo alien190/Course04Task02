@@ -1,10 +1,8 @@
 package com.example.alien.course04task02.ui.filmDetail;
 
 import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
-import android.widget.EditText;
 
-import com.example.alien.course04task02.data.IRepository;
+import com.example.alien.course04task02.data.IFilmRepository;
 import com.example.alien.course04task02.data.model.Film;
 import com.example.alien.course04task02.ui.common.BaseViewModel;
 import com.google.gson.Gson;
@@ -19,7 +17,7 @@ public class FilmDetailViewModel extends BaseViewModel {
     private MutableLiveData<Boolean> mIsSaved = new MutableLiveData<>();
     private Long mFilmId;
 
-    public FilmDetailViewModel(IRepository repository, Gson gson, Long filmId) {
+    public FilmDetailViewModel(IFilmRepository repository, Gson gson, Long filmId) {
         super(repository, gson);
         mIsSaved.postValue(false);
         mFilmId = filmId;
@@ -28,7 +26,7 @@ public class FilmDetailViewModel extends BaseViewModel {
         }
     }
 
-    public void loadFilm() {
+    private void loadFilm() {
         Film film = mRepository.getItem(mFilmId);
         mName.postValue(film.getName());
         mDirector.postValue(film.getDirector());
