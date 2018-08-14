@@ -1,10 +1,17 @@
 package com.example.alien.course04task02.data.model;
 
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Keep;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
+import org.greenrobot.greendao.annotation.Generated;
 
+@Entity
 public class Film extends RealmObject {
     @PrimaryKey
+    @Id
     private long id;
     private String name;
     private int year;
@@ -14,6 +21,7 @@ public class Film extends RealmObject {
     public Film() {
     }
 
+    @Keep
     public Film(long id, String name, int year, String director, double rating) {
         this.id = id;
         this.name = name;

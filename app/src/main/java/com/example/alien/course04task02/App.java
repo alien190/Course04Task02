@@ -1,9 +1,16 @@
 package com.example.alien.course04task02;
 
 import android.app.Application;
+import android.database.sqlite.SQLiteDatabase;
 import android.widget.Toast;
 
+import com.example.alien.course04task02.data.model.DaoMaster;
+import com.example.alien.course04task02.data.model.DaoSession;
+import com.example.alien.course04task02.data.model.FilmDao;
 import com.example.alien.course04task02.di.ApplicationModule;
+
+
+import javax.inject.Inject;
 
 import io.realm.Realm;
 import timber.log.Timber;
@@ -15,6 +22,7 @@ import toothpick.registries.MemberInjectorRegistryLocator;
 
 public class App extends Application {
 
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -25,11 +33,12 @@ public class App extends Application {
         MemberInjectorRegistryLocator.setRootRegistry(new com.example.alien.course04task02.MemberInjectorRegistry());
         FactoryRegistryLocator.setRootRegistry(new com.example.alien.course04task02.FactoryRegistry());
         Scope scope = Toothpick.openScope("Application");
-        scope.installModules(new ApplicationModule());
+        scope.installModules(new ApplicationModule(this));
 
         Timber.plant(new Timber.DebugTree());
 
-
         Toast.makeText(this, R.string.start_greeting, Toast.LENGTH_LONG).show();
+
+
     }
 }
