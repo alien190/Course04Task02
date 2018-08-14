@@ -2,6 +2,7 @@ package com.example.alien.course04task02.di;
 
 import android.app.Application;
 
+import com.example.alien.course04task02.BuildConfig;
 import com.example.alien.course04task02.data.IFilmRepository;
 import com.example.alien.course04task02.data.RealmFilmRepository;
 import com.example.alien.course04task02.data.model.FilmDao;
@@ -17,8 +18,11 @@ public class ApplicationModule extends Module{
     public ApplicationModule(Application application) {
         this.mApplication = application;
 
-        //bind(IFilmRepository.class).toInstance(new RealmFilmRepository());
-        bind(IFilmRepository.class).toProvider(GreenDaoFilmRepositoryProvider.class).providesSingletonInScope();
+        if(BuildConfig.useRealm) {
+            bind(IFilmRepository.class).toInstance(new RealmFilmRepository());
+        } else {
+            bind(IFilmRepository.class).toProvider(GreenDaoFilmRepositoryProvider.class).providesSingletonInScope();
+        }
         bind(Gson.class).toInstance(new Gson());
         bind(ViewModelCustomFactory.class).toProvider(ViewModelCustomFactoryProvider.class).providesSingletonInScope();
         bind(Application.class).toInstance(mApplication);

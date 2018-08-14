@@ -12,8 +12,6 @@ public class GreenDaoFilmRepository implements IFilmRepository {
     private static final int MIN_LENGTH_FOR_NAME_SEARCH = 3;
     private static final int MIN_LENGTH_FOR_DIRECTOR_SEARCH = 4;
 
-
-
     public GreenDaoFilmRepository(FilmDao mFilmDao) {
         this.mFilmDao = mFilmDao;
 

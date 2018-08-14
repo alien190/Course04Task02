@@ -1,16 +1,10 @@
 package com.example.alien.course04task02;
 
+import android.app.AlertDialog;
 import android.app.Application;
-import android.database.sqlite.SQLiteDatabase;
 import android.widget.Toast;
 
-import com.example.alien.course04task02.data.model.DaoMaster;
-import com.example.alien.course04task02.data.model.DaoSession;
-import com.example.alien.course04task02.data.model.FilmDao;
 import com.example.alien.course04task02.di.ApplicationModule;
-
-
-import javax.inject.Inject;
 
 import io.realm.Realm;
 import timber.log.Timber;
@@ -38,7 +32,5 @@ public class App extends Application {
         Timber.plant(new Timber.DebugTree());
 
         Toast.makeText(this, R.string.start_greeting, Toast.LENGTH_LONG).show();
-
-
     }
 }
