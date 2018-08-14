@@ -1,5 +1,7 @@
 package com.example.alien.course04task02.ui.filmList;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -82,7 +84,12 @@ public class ListAllFragment extends BaseFragment implements FilmListAdapter.IOn
 
     @Override
     public boolean OnItemLongClick(long id) {
-        Toast.makeText(getContext(), "long click id " + id, Toast.LENGTH_SHORT).show();
+        new AlertDialog.Builder(getContext())
+                .setMessage(R.string.delete_message)
+                .setNegativeButton(R.string.no_label, null)
+                .setPositiveButton(R.string.yes_label, (dialogInterface, i) -> mViewModel.deleteItem(id))
+                .create()
+                .show();
         return true;
     }
 }

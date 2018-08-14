@@ -120,7 +120,6 @@ public class RealmRepository implements IRepository {
 
         List<Film> retList = new ArrayList<>();
 
-
         List<Film> results = mRealm.copyFromRealm(mRealm.where(Film.class).sort("rating", Sort.DESCENDING).findAll());
         for (Film film : results) {
             if (retList.size() >= count) {

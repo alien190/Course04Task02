@@ -15,4 +15,7 @@
     <string name="mi_search_by_year">Поиск по году</string>
     <string name="mi_search_by_director">Поиск по режиссеру</string>
     <string name="mi_search_by_top">Топ фильмов по рейтингу</string>
+    <string name="delete_message">Удаляем фильм?</string>
+    <string name="no_label">нет</string>
+    <string name="yes_label">да</string>
 </resources>

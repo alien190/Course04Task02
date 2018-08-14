@@ -34,9 +34,13 @@ public abstract class BaseViewModel extends ViewModel {
     }
 
     public void generateData(String json) {
-        Type type = new TypeToken<List<Film>>() {}.getType();
+        Type type = new TypeToken<List<Film>>() {
+        }.getType();
         List<Film> films = mGson.fromJson(json, type);
         mRepository.insertItems(films);
     }
 
+    public void deleteItem(long id) {
+        mRepository.deleteItem(id);
+    }
 }
