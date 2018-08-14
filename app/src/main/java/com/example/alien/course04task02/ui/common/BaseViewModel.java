@@ -11,8 +11,13 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import io.realm.OrderedRealmCollection;
+import io.realm.RealmChangeListener;
+import io.realm.RealmResults;
+
 public abstract class BaseViewModel extends ViewModel {
     protected MutableLiveData<List<Film>> mFilmList = new MutableLiveData<>();
+    protected OrderedRealmCollection<Film> data;
     private MutableLiveData<Boolean> mIsEmpty = new MutableLiveData<>();
 
     protected IRepository mRepository;
@@ -22,7 +27,15 @@ public abstract class BaseViewModel extends ViewModel {
     public BaseViewModel(IRepository repository, Gson gson) {
         this.mRepository = repository;
         this.mGson = gson;
-        mFilmList.observeForever(list -> mIsEmpty.setValue(!(list != null && !list.isEmpty())));
+        mFilmList.observeForever(list ->
+        {
+            mIsEmpty.postValue(list != null && list.isEmpty());
+
+            if (list instanceof RealmResults) {
+                RealmResults<Film> filmRealmResults = (RealmResults<Film>) list;
+                filmRealmResults.addChangeListener(films -> mIsEmpty.postValue(films.isEmpty()));
+            }
+        });
     }
 
     public MutableLiveData<List<Film>> getFilmList() {
@@ -42,5 +55,9 @@ public abstract class BaseViewModel extends ViewModel {
 
     public void deleteItem(long id) {
         mRepository.deleteItem(id);
+    }
+
+    public OrderedRealmCollection<Film> getData() {
+        return data;
     }
 }

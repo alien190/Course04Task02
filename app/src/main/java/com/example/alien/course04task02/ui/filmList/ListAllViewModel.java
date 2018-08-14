@@ -8,7 +8,10 @@ public class ListAllViewModel extends BaseViewModel {
 
     public ListAllViewModel(IRepository repository, Gson gson) {
         super(repository, gson);
-        mRepository.getAllLive(list -> mFilmList.postValue(list));
+        //mRepository.getAllLive(list -> mFilmList.postValue(list));
+        //data = mRepository.getAllRealm();
+        mFilmList.postValue(mRepository.getAll());
+
     }
 
 }

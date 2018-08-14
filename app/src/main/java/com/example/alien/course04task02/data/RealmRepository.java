@@ -8,9 +8,11 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import io.realm.Case;
 import io.realm.OrderedCollectionChangeSet;
+import io.realm.OrderedRealmCollection;
 import io.realm.OrderedRealmCollectionChangeListener;
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
+import io.realm.RealmList;
 import io.realm.RealmResults;
 import io.realm.Sort;
 
@@ -93,26 +95,28 @@ public class RealmRepository implements IRepository {
     public List<Film> search(String query) {
         if (query != null && query.length() >= MIN_LENGTH_FOR_NAME_SEARCH) {
             query = "*" + query + "*";
-            return mRealm.copyFromRealm(mRealm.where(Film.class).like("name", query, Case.INSENSITIVE).findAll());
+        } else {
+            query = "";
         }
-        return new ArrayList<>();
+        return mRealm.where(Film.class).like("name", query, Case.INSENSITIVE).findAll();
     }
 
     @Override
     public List<Film> searchInBounds(int startYear, int endYear) {
         if (endYear == 0) {
-            return mRealm.copyFromRealm(mRealm.where(Film.class).equalTo("year", startYear).findAll());
+            return mRealm.where(Film.class).equalTo("year", startYear).findAll();
         } else {
-            return mRealm.copyFromRealm(mRealm.where(Film.class).between("year", startYear, endYear).findAll());
+            return mRealm.where(Film.class).between("year", startYear, endYear).findAll();
         }
     }
 
     @Override
     public List<Film> searchByDirector(String name) {
-        if (name != null && name.length() >= MIN_LENGTH_FOR_DIRECTOR_SEARCH) {
-            return mRealm.copyFromRealm(mRealm.where(Film.class).beginsWith("director", name, Case.INSENSITIVE).findAll());
+        if (name == null || name.length() < MIN_LENGTH_FOR_DIRECTOR_SEARCH) {
+            //todo вот с этии нужно что-то придумать :)
+            name = "bla-bla-bla";
         }
-        return new ArrayList<>();
+        return mRealm.where(Film.class).beginsWith("director", name, Case.INSENSITIVE).findAll();
     }
 
     @Override
@@ -130,18 +134,11 @@ public class RealmRepository implements IRepository {
         return retList;
     }
 
-    @Override
-    public void getAllLive(OnListChangeListener onListChangeListener) {
-        realmResults= mRealm.where(Film.class).findAllAsync().sort("id", Sort.ASCENDING);
-        realmResults.addChangeListener(films -> {
-            if(onListChangeListener!=null) onListChangeListener.onChange(films);
-        });
-        if(onListChangeListener!=null) onListChangeListener.onChange(realmResults);
-    }
 
     @Override
     public void createFilmAndUpdate(long id, String name, String director, int year, double rating) {
         Film film = new Film(id, name, year, director, rating);
         updateItem(film);
     }
+
 }

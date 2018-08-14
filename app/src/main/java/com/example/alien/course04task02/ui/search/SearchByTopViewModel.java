@@ -17,13 +17,11 @@ public class SearchByTopViewModel extends BaseViewModel {
 
     public SearchByTopViewModel(IRepository repository, Gson gson) {
         super(repository, gson);
-        mSearchByTopQuery.postValue("0");
+       // mSearchByTopQuery.postValue("0");
         searchByTop();
     }
 
     public void searchByTop() {
-        //todo разобратся с падением при изменении списка объектов
-        //mFilmList.setValue(null);
         int count = 0;
         try {
             count = Integer.valueOf(mSearchByTopQuery.getValue());

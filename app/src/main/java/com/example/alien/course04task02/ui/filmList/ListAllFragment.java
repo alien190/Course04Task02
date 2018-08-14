@@ -1,7 +1,6 @@
 package com.example.alien.course04task02.ui.filmList;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,9 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.example.alien.course04task02.R;
+import com.example.alien.course04task02.data.model.Film;
 import com.example.alien.course04task02.ui.common.BaseFragment;
 import com.example.alien.course04task02.ui.common.BaseViewModel;
 import com.example.alien.course04task02.ui.filmDetail.FilmDetailActivity;
@@ -22,14 +21,18 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.OrderedRealmCollection;
 
-public class ListAllFragment extends BaseFragment implements FilmListAdapter.IOnItemClickListener {
+public class ListAllFragment extends BaseFragment implements IOnItemClickListener {
     View view;
     @BindView(R.id.rvFilmList)
     RecyclerView mRecyclerView;
 
     @BindView(R.id.ll_error)
     LinearLayout mErrorLayout;
+
+    @Inject
+    protected FilmListRealmAdapter mRealmAdapter;
 
     @Inject
     protected FilmListAdapter mAdapter;
@@ -63,8 +66,21 @@ public class ListAllFragment extends BaseFragment implements FilmListAdapter.IOn
         super.onActivityCreated(savedInstanceState);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRecyclerView.setAdapter(mAdapter);
-        mViewModel.getFilmList().observe(this, list -> {mAdapter.submitList(list); mAdapter.notifyDataSetChanged();});
+
+        //mRealmAdapter = new FilmListRealmAdapter(this);
+
+        //mRealmAdapter.updateData((OrderedRealmCollection<Film>) mViewModel.getFilmList().getValue());
+
+        mViewModel.getFilmList().observe(this, list -> {
+            if (list instanceof OrderedRealmCollection) {
+                mRealmAdapter.updateData((OrderedRealmCollection<Film>) list);
+                mRecyclerView.setAdapter(mRealmAdapter);
+            } else {
+                mAdapter.submitList(list);
+                mRecyclerView.setAdapter(mAdapter);
+            }
+        });
+
         mViewModel.getIsEmpty().observe(this, isEmpty -> {
             if (isEmpty != null && !isEmpty) {
                 mRecyclerView.setVisibility(View.VISIBLE);
@@ -92,4 +108,6 @@ public class ListAllFragment extends BaseFragment implements FilmListAdapter.IOn
                 .show();
         return true;
     }
+
+
 }
