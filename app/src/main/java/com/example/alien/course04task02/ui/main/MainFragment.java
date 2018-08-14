@@ -128,7 +128,7 @@ public class MainFragment extends BaseFragment {
                 return true;
             }
             case R.id.mi_add: {
-                FilmDetailActivity.startActivity(getContext());
+                FilmDetailActivity.startActivity(getContext(),-1);
                 return true;
             }
 

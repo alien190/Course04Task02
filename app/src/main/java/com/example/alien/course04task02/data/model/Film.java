@@ -11,6 +11,17 @@ public class Film extends RealmObject {
     private String director;
     private double rating;
 
+    public Film() {
+    }
+
+    public Film(long id, String name, int year, String director, double rating) {
+        this.id = id;
+        this.name = name;
+        this.year = year;
+        this.director = director;
+        this.rating = rating;
+    }
+
     public long getId() {
         return id;
     }

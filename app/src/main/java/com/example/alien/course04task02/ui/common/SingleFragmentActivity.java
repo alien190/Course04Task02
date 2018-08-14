@@ -25,6 +25,7 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
     public void onBackPressed() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         if (fragmentManager.getBackStackEntryCount() == 1) {
+            closeScope();
             finish();
         } else {
             fragmentManager.popBackStack();
@@ -38,4 +39,5 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
                 .addToBackStack(fragment.getClass().getSimpleName())
                 .commit();
     }
+    protected abstract void closeScope();
 }

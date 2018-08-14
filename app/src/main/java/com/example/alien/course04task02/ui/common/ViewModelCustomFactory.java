@@ -38,9 +38,6 @@ public class ViewModelCustomFactory implements ViewModelProvider.Factory {
         if(modelClass == SearchByTopViewModel.class) {
             return (T) new SearchByTopViewModel(mRepository, mGson);
         }
-        if(modelClass == FilmDetailViewModel.class) {
-            return (T) new FilmDetailViewModel(mRepository, mGson);
-        }
         return (T) new ListAllViewModel(mRepository, mGson);
     }
 }

@@ -28,6 +28,7 @@ public interface IRepository {
     List<Film> getTopFilms(int count);
 
     public long createFilmAndSave(String name, String director, int year, double rating);
+    public void createFilmAndUpdate(long id, String name, String director, int year, double rating);
 
     interface OnListChangeListener{
         void onChange(List<Film> filmList);

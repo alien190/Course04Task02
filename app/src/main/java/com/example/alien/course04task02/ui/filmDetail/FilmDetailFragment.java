@@ -13,6 +13,7 @@ import com.example.alien.course04task02.databinding.FilmDetailBinding;
 import com.example.alien.course04task02.di.FilmListFragmentModule;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import toothpick.Scope;
 import toothpick.Toothpick;
@@ -20,7 +21,13 @@ import toothpick.Toothpick;
 public class FilmDetailFragment extends Fragment {
 
     @Inject
-    FilmDetailViewModel mViewModel;
+    protected FilmDetailViewModel mViewModel;
+    @Inject
+    @Named("FilmId")
+    protected Long mFilmId;
+
+
+    private Scope mScope;
 
     private FilmDetailBinding mFilmDetailBinding;
 
@@ -44,12 +51,17 @@ public class FilmDetailFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        Scope scope = Toothpick.openScopes(getActivity().getClass().getSimpleName());
-        Toothpick.inject(this, scope);
+        mScope = Toothpick.openScopes(getActivity().getClass().getSimpleName());
+        Toothpick.inject(this, mScope);
 
         mFilmDetailBinding.setVm(mViewModel);
+        mFilmDetailBinding.notifyChange();
+
         mViewModel.getIsSaved().observe(this, saved -> {
-            if (saved != null && saved) getActivity().onBackPressed();
+            if (saved != null && saved) {
+                getActivity().finish();
+                Toothpick.closeScope(getActivity().getClass().getSimpleName());
+            }
         });
     }
 }

@@ -85,13 +85,7 @@ public class RealmRepository implements IRepository {
     }
 
     public long createFilmAndSave(String name, String director, int year, double rating) {
-
-        Film film = new Film();
-        film.setName(name);
-        film.setDirector(director);
-        film.setYear(year);
-        film.setRating(rating);
-
+        Film film = new Film(0, name, year, director, rating);
         return insertItem(film);
     }
 
@@ -144,5 +138,11 @@ public class RealmRepository implements IRepository {
             if(onListChangeListener!=null) onListChangeListener.onChange(films);
         });
         if(onListChangeListener!=null) onListChangeListener.onChange(realmResults);
+    }
+
+    @Override
+    public void createFilmAndUpdate(long id, String name, String director, int year, double rating) {
+        Film film = new Film(id, name, year, director, rating);
+        updateItem(film);
     }
 }

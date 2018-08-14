@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.alien.course04task02.R;
 import com.example.alien.course04task02.ui.common.BaseFragment;
 import com.example.alien.course04task02.ui.common.BaseViewModel;
+import com.example.alien.course04task02.ui.filmDetail.FilmDetailActivity;
 
 import javax.inject.Inject;
 
@@ -76,7 +77,7 @@ public class ListAllFragment extends BaseFragment implements FilmListAdapter.IOn
 
     @Override
     public void OnItemClick(long id) {
-        Toast.makeText(getContext(), "click id " + id, Toast.LENGTH_SHORT).show();
+        FilmDetailActivity.startActivity(getContext(), id);
     }
 
     @Override
