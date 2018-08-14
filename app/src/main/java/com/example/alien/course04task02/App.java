@@ -32,6 +32,6 @@ public class App extends Application {
         Timber.plant(new Timber.DebugTree());
 
 
-        Toast.makeText(this, "dddd", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, R.string.start_greeteng, Toast.LENGTH_LONG).show();
     }
 }

@@ -18,4 +18,5 @@
     <string name="delete_message">Удаляем фильм?</string>
     <string name="no_label">нет</string>
     <string name="yes_label">да</string>
+    <string name="start_greeteng">Для изменения - короткое нажитие  Для редактирования - длинное</string>
 </resources>
