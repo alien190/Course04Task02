@@ -13,8 +13,6 @@ import toothpick.configuration.Configuration;
 import toothpick.registries.FactoryRegistryLocator;
 import toothpick.registries.MemberInjectorRegistryLocator;
 
-import static com.example.alien.course04task02.BuildConfig.DEBUG;
-
 public class App extends Application {
 
     @Override
@@ -32,6 +30,6 @@ public class App extends Application {
         Timber.plant(new Timber.DebugTree());
 
 
-        Toast.makeText(this, R.string.start_greeteng, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, R.string.start_greeting, Toast.LENGTH_LONG).show();
     }
 }
