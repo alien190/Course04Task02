@@ -58,7 +58,7 @@ public class FilmDetailFragment extends Fragment {
         mFilmDetailBinding.setVm(mViewModel);
         mFilmDetailBinding.notifyChange();
 
-        Toast.makeText(getActivity(), String.valueOf(mFilmId), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), String.valueOf(mFilmId), Toast.LENGTH_SHORT).show();
 
         mViewModel.getIsSaved().observe(this, saved -> {
             if (saved != null && saved) {
