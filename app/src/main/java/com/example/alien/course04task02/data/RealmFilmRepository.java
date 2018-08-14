@@ -81,7 +81,7 @@ public class RealmFilmRepository implements IFilmRepository {
     }
 
     public long createFilmAndSave(String name, String director, int year, double rating) {
-        Film film = new Film(0, name, year, director, rating);
+        Film film = new Film(0L, name, year, director, rating);
         return insertItem(film);
     }
 

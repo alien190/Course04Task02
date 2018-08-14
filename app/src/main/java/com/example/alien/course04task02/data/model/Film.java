@@ -11,8 +11,8 @@ import org.greenrobot.greendao.annotation.Generated;
 @Entity
 public class Film extends RealmObject {
     @PrimaryKey
-    @Id
-    private long id;
+    @Id(autoincrement = true)
+    private Long id;
     private String name;
     private int year;
     private String director;
@@ -21,8 +21,8 @@ public class Film extends RealmObject {
     public Film() {
     }
 
-    @Keep
-    public Film(long id, String name, int year, String director, double rating) {
+    @Generated(hash = 1265539438)
+    public Film(Long id, String name, int year, String director, double rating) {
         this.id = id;
         this.name = name;
         this.year = year;
@@ -30,7 +30,7 @@ public class Film extends RealmObject {
         this.rating = rating;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -68,5 +68,9 @@ public class Film extends RealmObject {
 
     public void setRating(double rating) {
         this.rating = rating;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

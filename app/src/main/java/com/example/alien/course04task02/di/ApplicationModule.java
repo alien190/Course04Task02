@@ -17,7 +17,8 @@ public class ApplicationModule extends Module{
     public ApplicationModule(Application application) {
         this.mApplication = application;
 
-        bind(IFilmRepository.class).toInstance(new RealmFilmRepository());
+        //bind(IFilmRepository.class).toInstance(new RealmFilmRepository());
+        bind(IFilmRepository.class).toProvider(GreenDaoFilmRepositoryProvider.class).providesSingletonInScope();
         bind(Gson.class).toInstance(new Gson());
         bind(ViewModelCustomFactory.class).toProvider(ViewModelCustomFactoryProvider.class).providesSingletonInScope();
         bind(Application.class).toInstance(mApplication);

@@ -1,24 +1,47 @@
 package com.example.alien.course04task02.data;
 
-import com.example.alien.course04task02.data.IFilmRepository;
 import com.example.alien.course04task02.data.model.Film;
+import com.example.alien.course04task02.data.model.FilmDao;
 
 import java.util.List;
 
 public class GreenDaoFilmRepository implements IFilmRepository {
+
+    private FilmDao mFilmDao;
+
+    private static final int MIN_LENGTH_FOR_NAME_SEARCH = 3;
+    private static final int MIN_LENGTH_FOR_DIRECTOR_SEARCH = 4;
+
+
+
+    public GreenDaoFilmRepository(FilmDao mFilmDao) {
+        this.mFilmDao = mFilmDao;
+
+    }
+
     @Override
     public long insertItem(Film film) {
-        return 0;
+        film.setId(null);
+        return mFilmDao.insert(film);
     }
 
     @Override
     public void insertItems(List<Film> films) {
-
+        for (Film film:films) {
+            insertItem(film);
+        }
     }
 
     @Override
     public Film getItem(long id) {
-        return null;
+        List<Film> films = mFilmDao.queryBuilder()
+                .where(FilmDao.Properties.Id.eq(id))
+                .list();
+        if (films.isEmpty()) {
+            return null;
+        } else {
+            return films.get(0);
+        }
     }
 
     @Override
@@ -28,7 +51,7 @@ public class GreenDaoFilmRepository implements IFilmRepository {
 
     @Override
     public List<Film> getAll() {
-        return null;
+        return mFilmDao.queryBuilder().list();
     }
 
     @Override
