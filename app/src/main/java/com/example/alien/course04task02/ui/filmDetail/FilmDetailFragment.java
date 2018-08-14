@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.alien.course04task02.R;
 import com.example.alien.course04task02.databinding.FilmDetailBinding;
@@ -56,6 +57,8 @@ public class FilmDetailFragment extends Fragment {
 
         mFilmDetailBinding.setVm(mViewModel);
         mFilmDetailBinding.notifyChange();
+
+        Toast.makeText(getActivity(), String.valueOf(mFilmId), Toast.LENGTH_SHORT).show();
 
         mViewModel.getIsSaved().observe(this, saved -> {
             if (saved != null && saved) {

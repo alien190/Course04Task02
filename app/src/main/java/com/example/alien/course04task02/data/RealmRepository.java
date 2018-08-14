@@ -53,8 +53,7 @@ public class RealmRepository implements IRepository {
 
     @Override
     public Film getItem(long id) {
-        Film film = getFilmById(id);
-        return film != null ? mRealm.copyFromRealm(film) : null;
+        return getFilmById(id);
     }
 
     @Override

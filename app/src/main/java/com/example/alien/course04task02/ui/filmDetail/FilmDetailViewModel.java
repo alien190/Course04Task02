@@ -28,7 +28,7 @@ public class FilmDetailViewModel extends BaseViewModel {
         }
     }
 
-    private void loadFilm() {
+    public void loadFilm() {
         Film film = mRepository.getItem(mFilmId);
         mName.postValue(film.getName());
         mDirector.postValue(film.getDirector());
