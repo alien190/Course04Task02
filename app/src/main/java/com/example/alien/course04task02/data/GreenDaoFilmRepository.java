@@ -4,6 +4,7 @@ import com.example.alien.course04task02.data.model.Film;
 import com.example.alien.course04task02.data.model.FilmDao;
 import com.example.alien.course04task02.data.model.FilmDao.Properties;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -95,7 +96,13 @@ public class GreenDaoFilmRepository implements IFilmRepository {
 
     @Override
     public List<Film> searchByDirector(String name) {
-        return null;
+        if (name != null && name.length() >= MIN_LENGTH_FOR_DIRECTOR_SEARCH) {
+            return mFilmDao.queryBuilder()
+                    .where(Properties.Director.like(name+"%"))
+                    .list();
+        } else {
+            return new ArrayList<>();
+        }
     }
 
     @Override
