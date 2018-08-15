@@ -12,17 +12,14 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.example.alien.course04task02.R;
-import com.example.alien.course04task02.data.model.Film;
 import com.example.alien.course04task02.ui.common.BaseFragment;
 import com.example.alien.course04task02.ui.common.BaseViewModel;
-import com.example.alien.course04task02.ui.filmDetail.FilmDetailActivity;
 import com.example.alien.course04task02.ui.filmDetail.FilmDetailDialogFragment;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.realm.OrderedRealmCollection;
 
 public class ListAllFragment extends BaseFragment implements IOnItemClickListener {
     View view;

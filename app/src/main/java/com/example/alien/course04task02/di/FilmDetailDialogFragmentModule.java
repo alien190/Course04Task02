@@ -3,12 +3,9 @@ package com.example.alien.course04task02.di;
 
 import android.support.v4.app.DialogFragment;
 
-import com.example.alien.course04task02.ui.filmDetail.FilmDetailFragment;
 import com.example.alien.course04task02.ui.filmDetail.FilmDetailViewModel;
 import com.example.alien.course04task02.ui.filmDetail.FilmDetailViewModelCustomFactory;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
 
 import toothpick.config.Module;
 
