@@ -60,7 +60,7 @@ public class GreenDaoFilmRepository implements IFilmRepository {
 
     @Override
     public void updateItem(Film film) {
-
+        mFilmDao.update(film);
     }
 
     @Override
@@ -85,11 +85,13 @@ public class GreenDaoFilmRepository implements IFilmRepository {
 
     @Override
     public long createFilmAndSave(String name, String director, int year, double rating) {
-        return 0;
+        Film film = new Film(null, name, year, director, rating);
+        return insertItem(film);
     }
 
     @Override
     public void createFilmAndUpdate(long id, String name, String director, int year, double rating) {
-
+        Film film = new Film(id, name, year, director, rating);
+        updateItem(film);
     }
 }
