@@ -22,6 +22,7 @@ import com.example.alien.course04task02.databinding.SearchByYearBinding;
 import com.example.alien.course04task02.ui.common.BaseFragment;
 import com.example.alien.course04task02.ui.common.BaseViewModel;
 import com.example.alien.course04task02.ui.filmDetail.FilmDetailActivity;
+import com.example.alien.course04task02.ui.filmDetail.FilmDetailDialogFragment;
 import com.google.gson.Gson;
 
 import java.io.InputStream;
@@ -112,23 +113,14 @@ public class MainFragment extends BaseFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.mi_generate: {
-
-                String json = "";
-
-                try {
-                    AssetManager am = getContext().getAssets();
-                    InputStream is = am.open("filmList.json");
-                    try (Scanner s = new Scanner(is).useDelimiter("\\A")) {
-                        json = s.hasNext() ? s.next() : "";
-                    }
-                } catch (Throwable t) {
-                    Timber.d(t);
-                }
-                mViewModel.generateData(json);
+                generateData();
                 return true;
             }
             case R.id.mi_add: {
-                FilmDetailActivity.startActivity(getContext(),-1);
+                //FilmDetailActivity.startActivity(getContext(), -1);
+
+                FilmDetailDialogFragment filmDetailDialogFragment = new FilmDetailDialogFragment();
+                filmDetailDialogFragment.show(getActivity().getSupportFragmentManager(), "filmDetailDialogFragment");
                 return true;
             }
 
@@ -151,5 +143,20 @@ public class MainFragment extends BaseFragment {
             default:
                 return false;
         }
+    }
+
+    private void generateData() {
+        String json = "";
+
+        try {
+            AssetManager am = getContext().getAssets();
+            InputStream is = am.open("filmList.json");
+            try (Scanner s = new Scanner(is).useDelimiter("\\A")) {
+                json = s.hasNext() ? s.next() : "";
+            }
+        } catch (Throwable t) {
+            Timber.d(t);
+        }
+        mViewModel.generateData(json);
     }
 }

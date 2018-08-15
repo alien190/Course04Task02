@@ -8,8 +8,11 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 
 import com.example.alien.course04task02.R;
+import com.example.alien.course04task02.data.model.Film;
 
 public class FilmDetailDialogFragment extends DialogFragment {
+
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
