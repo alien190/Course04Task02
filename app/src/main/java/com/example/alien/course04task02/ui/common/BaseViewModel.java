@@ -8,6 +8,10 @@ import com.example.alien.course04task02.data.model.Film;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.lang.reflect.Type;
 import java.util.List;
 
@@ -26,6 +30,9 @@ public abstract class BaseViewModel extends ViewModel {
     public BaseViewModel(IFilmRepository repository, Gson gson) {
         this.mRepository = repository;
         this.mGson = gson;
+
+        EventBus.getDefault().register(this);
+
         mFilmList.observeForever(list ->
         {
             mIsEmpty.postValue(list != null && list.isEmpty());
@@ -59,4 +66,18 @@ public abstract class BaseViewModel extends ViewModel {
     public OrderedRealmCollection<Film> getData() {
         return data;
     }
+
+    @Override
+    protected void onCleared() {
+        EventBus.getDefault().unregister(this);
+        super.onCleared();
+    }
+
+    @Subscribe(threadMode = ThreadMode.ASYNC)
+    public void onFilmDataBaseUpdate(IFilmRepository.IOnFilmDataBaseUpdate event)
+    {
+        updateFromRepository();
+    }
+
+    abstract protected void updateFromRepository();
 }

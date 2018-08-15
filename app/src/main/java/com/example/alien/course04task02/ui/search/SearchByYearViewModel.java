@@ -8,6 +8,8 @@ import com.example.alien.course04task02.data.IFilmRepository;
 import com.example.alien.course04task02.ui.common.BaseViewModel;
 import com.google.gson.Gson;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.regex.Pattern;
 
 import timber.log.Timber;
@@ -18,12 +20,7 @@ public class SearchByYearViewModel extends BaseViewModel {
 
     public SearchByYearViewModel(IFilmRepository repository, Gson gson) {
         super(repository, gson);
-        searchByYear();
-    }
-
-    private void searchByYear() {
-        Pair<Integer, Integer> parseResult = parseYearQuery();
-        mFilmList.postValue(mRepository.searchInBounds(parseResult.first, parseResult.second));
+        updateFromRepository();
     }
 
     public MutableLiveData<String> getSearchByYearQuery() {
@@ -32,7 +29,7 @@ public class SearchByYearViewModel extends BaseViewModel {
 
     public void setSearchByYearQuery(CharSequence query) {
         this.mSearchByYearQuery.setValue(query.toString());
-        searchByYear();
+        updateFromRepository();
     }
 
     private Pair<Integer, Integer> parseYearQuery() {
@@ -62,5 +59,11 @@ public class SearchByYearViewModel extends BaseViewModel {
         Timber.d("startYear: %d", startYear);
         Timber.d("endYear: %d", endYear);
         return new Pair<>(startYear, endYear);
+    }
+
+    @Override
+    protected void updateFromRepository() {
+        Pair<Integer, Integer> parseResult = parseYearQuery();
+        mFilmList.postValue(mRepository.searchInBounds(parseResult.first, parseResult.second));
     }
 }

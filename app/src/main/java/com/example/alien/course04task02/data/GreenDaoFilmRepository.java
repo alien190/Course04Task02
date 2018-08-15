@@ -4,6 +4,8 @@ import com.example.alien.course04task02.data.model.Film;
 import com.example.alien.course04task02.data.model.FilmDao;
 import com.example.alien.course04task02.data.model.FilmDao.Properties;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +25,9 @@ public class GreenDaoFilmRepository implements IFilmRepository {
     @Override
     public long insertItem(Film film) {
         film.setId(null);
-        return mFilmDao.insert(film);
+        Long id = mFilmDao.insert(film);
+        EventBus.getDefault().post(new OnFilmDataBaseUpdate());
+        return id;
     }
 
     @Override
@@ -51,7 +55,7 @@ public class GreenDaoFilmRepository implements IFilmRepository {
                 .where(Properties.Id.eq(id))
                 .buildDelete()
                 .executeDeleteWithoutDetachingEntities();
-
+        EventBus.getDefault().post(new OnFilmDataBaseUpdate());
         //todo как получить резултат удаления?
         return true;
     }
@@ -64,6 +68,7 @@ public class GreenDaoFilmRepository implements IFilmRepository {
     @Override
     public void updateItem(Film film) {
         mFilmDao.update(film);
+        EventBus.getDefault().post(new OnFilmDataBaseUpdate());
     }
 
     @Override
@@ -127,4 +132,6 @@ public class GreenDaoFilmRepository implements IFilmRepository {
         Film film = new Film(id, name, year, director, rating);
         updateItem(film);
     }
+
+    class OnFilmDataBaseUpdate implements IOnFilmDataBaseUpdate {}
 }

@@ -12,12 +12,9 @@ public class SearchByDirectorViewModel extends BaseViewModel {
 
     public SearchByDirectorViewModel(IFilmRepository repository, Gson gson) {
         super(repository, gson);
-        searchByDirector();
+        updateFromRepository();
     }
 
-    private void searchByDirector() {
-        mFilmList.postValue(mRepository.searchByDirector(mSearchByDirectorQuery.getValue()));
-    }
 
     public MutableLiveData<String> getSearchByDirectorQuery() {
         return mSearchByDirectorQuery;
@@ -25,7 +22,11 @@ public class SearchByDirectorViewModel extends BaseViewModel {
 
     public void setSearchByDirectorQuery(CharSequence query) {
         this.mSearchByDirectorQuery.setValue(query.toString());
-        searchByDirector();
+        updateFromRepository();
     }
 
+    @Override
+    protected void updateFromRepository() {
+        mFilmList.postValue(mRepository.searchByDirector(mSearchByDirectorQuery.getValue()));
+    }
 }

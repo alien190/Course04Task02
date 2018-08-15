@@ -17,21 +17,9 @@ public class SearchByTopViewModel extends BaseViewModel {
 
     public SearchByTopViewModel(IFilmRepository repository, Gson gson) {
         super(repository, gson);
-       // mSearchByTopQuery.postValue("0");
-        searchByTop();
+        updateFromRepository();
     }
 
-    private void searchByTop() {
-        int count = 0;
-        try {
-            count = Integer.valueOf(mSearchByTopQuery.getValue());
-        } catch (Throwable t) {
-            Timber.d(t);
-        }
-
-        List<Film> filmList = mRepository.getTopFilms(count);
-        mFilmList.postValue(filmList);
-    }
 
     public MutableLiveData<String> getSearchByTopQuery() {
         return mSearchByTopQuery;
@@ -39,7 +27,17 @@ public class SearchByTopViewModel extends BaseViewModel {
 
     public void setSearchByTopQuery(CharSequence query) {
         this.mSearchByTopQuery.setValue(query.toString());
-        searchByTop();
+        updateFromRepository();
     }
 
+    @Override
+    protected void updateFromRepository() {
+        int count = 0;
+        try {
+            count = Integer.valueOf(mSearchByTopQuery.getValue());
+        } catch (Throwable t) {
+            Timber.d(t);
+        }
+        mFilmList.postValue(mRepository.getTopFilms(count));
+    }
 }

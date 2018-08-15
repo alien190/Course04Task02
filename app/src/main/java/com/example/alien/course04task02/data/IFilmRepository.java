@@ -32,4 +32,6 @@ public interface IFilmRepository {
 
     void createFilmAndUpdate(long id, String name, String director, int year, double rating);
 
+    interface IOnFilmDataBaseUpdate {}
+
 }

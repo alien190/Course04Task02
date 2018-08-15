@@ -86,4 +86,9 @@ public class FilmDetailViewModel extends BaseViewModel {
     public MutableLiveData<Boolean> getIsSaved() {
         return mIsSaved;
     }
+
+    @Override
+    protected void updateFromRepository() {
+
+    }
 }

@@ -12,11 +12,7 @@ public class SearchByNameViewModel extends BaseViewModel {
 
     public SearchByNameViewModel(IFilmRepository repository, Gson gson) {
         super(repository, gson);
-        searchByName();
-    }
-
-    private void searchByName() {
-        mFilmList.postValue(mRepository.search(mSearchByNameQuery.getValue()));
+        updateFromRepository();
     }
 
     public MutableLiveData<String> getSearchByNameQuery() {
@@ -25,7 +21,11 @@ public class SearchByNameViewModel extends BaseViewModel {
 
     public void setSearchByNameQuery(CharSequence query) {
         this.mSearchByNameQuery.setValue(query.toString());
-        searchByName();
+        updateFromRepository();
     }
 
+    @Override
+    protected void updateFromRepository() {
+        mFilmList.postValue(mRepository.search(mSearchByNameQuery.getValue()));
+    }
 }
