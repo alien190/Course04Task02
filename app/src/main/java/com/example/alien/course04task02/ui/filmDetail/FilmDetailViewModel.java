@@ -85,4 +85,9 @@ public class FilmDetailViewModel extends BaseViewModel {
     public int getTitleId() {
         return mTitleId;
     }
+
+    @Override
+    protected void updateFromRepository() {
+
+    }
 }

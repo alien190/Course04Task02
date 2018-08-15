@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
+apply plugin: 'org.greenrobot.greendao'
 
 android {
     compileSdkVersion 27
@@ -16,6 +17,7 @@ android {
                 arguments = [ toothpick_registry_package_name : 'com.example.alien.course04task02' ]
             }
         }
+        buildConfigField("Boolean", "useRealm", "false")
     }
     buildTypes {
         release {
@@ -32,6 +34,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+}
+
+greendao {
+    schemaVersion 1
 }
 
 dependencies {
@@ -74,5 +80,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.2'
 
     implementation 'io.realm:android-adapters:2.1.1'
+
+    implementation 'org.greenrobot:greendao:3.2.2'
 
 }

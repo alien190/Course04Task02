@@ -2,6 +2,8 @@ package com.example.alien.course04task02.data;
 
 import com.example.alien.course04task02.data.model.Film;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
@@ -81,7 +83,7 @@ public class RealmFilmRepository implements IFilmRepository {
     }
 
     public long createFilmAndSave(String name, String director, int year, double rating) {
-        Film film = new Film(0, name, year, director, rating);
+        Film film = new Film(0L, name, year, director, rating);
         return insertItem(film);
     }
 
@@ -133,5 +135,6 @@ public class RealmFilmRepository implements IFilmRepository {
         Film film = new Film(id, name, year, director, rating);
         updateItem(film);
     }
+
 
 }
