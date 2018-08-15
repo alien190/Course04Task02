@@ -2,10 +2,10 @@ package com.example.alien.course04task02.data;
 
 import com.example.alien.course04task02.data.model.Film;
 import com.example.alien.course04task02.data.model.FilmDao;
+import com.example.alien.course04task02.data.model.FilmDao.Properties;
 
 import java.util.List;
 
-import io.realm.Case;
 
 public class GreenDaoFilmRepository implements IFilmRepository {
 
@@ -27,7 +27,7 @@ public class GreenDaoFilmRepository implements IFilmRepository {
 
     @Override
     public void insertItems(List<Film> films) {
-        for (Film film:films) {
+        for (Film film : films) {
             insertItem(film);
         }
     }
@@ -35,7 +35,7 @@ public class GreenDaoFilmRepository implements IFilmRepository {
     @Override
     public Film getItem(long id) {
         List<Film> films = mFilmDao.queryBuilder()
-                .where(FilmDao.Properties.Id.eq(id))
+                .where(Properties.Id.eq(id))
                 .list();
         if (films.isEmpty()) {
             return null;
@@ -47,7 +47,7 @@ public class GreenDaoFilmRepository implements IFilmRepository {
     @Override
     public boolean deleteItem(long id) {
         mFilmDao.queryBuilder()
-                .where(FilmDao.Properties.Id.eq(id))
+                .where(Properties.Id.eq(id))
                 .buildDelete()
                 .executeDeleteWithoutDetachingEntities();
 
@@ -80,7 +80,17 @@ public class GreenDaoFilmRepository implements IFilmRepository {
 
     @Override
     public List<Film> searchInBounds(int startYear, int endYear) {
-        return null;
+        if (endYear == 0) {
+            return mFilmDao.queryBuilder()
+                    .where(Properties.Year.eq(startYear))
+                    .orderAsc(Properties.Year)
+                    .list();
+        } else {
+            return mFilmDao.queryBuilder()
+                    .where(Properties.Year.between(startYear, endYear))
+                    .orderAsc(Properties.Year)
+                    .list();
+        }
     }
 
     @Override
