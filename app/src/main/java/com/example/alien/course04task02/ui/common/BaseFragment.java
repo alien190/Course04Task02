@@ -38,7 +38,7 @@ public abstract class BaseFragment extends Fragment {
 
     @Override
     public void onDestroy() {
-       // Toothpick.closeScope(mScopeName);
+        Toothpick.closeScope(mScopeName);
         super.onDestroy();
     }
 

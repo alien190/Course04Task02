@@ -16,6 +16,7 @@ import com.example.alien.course04task02.data.model.Film;
 import com.example.alien.course04task02.ui.common.BaseFragment;
 import com.example.alien.course04task02.ui.common.BaseViewModel;
 import com.example.alien.course04task02.ui.filmDetail.FilmDetailActivity;
+import com.example.alien.course04task02.ui.filmDetail.FilmDetailDialogFragment;
 
 import javax.inject.Inject;
 
@@ -95,7 +96,8 @@ public class ListAllFragment extends BaseFragment implements IOnItemClickListene
 
     @Override
     public void OnItemClick(long id) {
-        FilmDetailActivity.startActivity(getContext(), id);
+        FilmDetailDialogFragment filmDetailDialogFragment = FilmDetailDialogFragment.newInstance(id);
+        filmDetailDialogFragment.show(getActivity().getSupportFragmentManager(), "filmDetailDialogFragment");
     }
 
     @Override
