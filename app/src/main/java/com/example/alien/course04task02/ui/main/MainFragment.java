@@ -34,12 +34,10 @@ import timber.log.Timber;
 
 public class MainFragment extends BaseFragment {
 
-
     private static final String KEY_TYPE = "KeyType";
 
     @Inject
     protected BaseViewModel mViewModel;
-
 
     private int mSearchType;
     private ViewDataBinding mViewDataBinding;
@@ -59,8 +57,6 @@ public class MainFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // mSearchType = mSearchType != 0 ? mSearchType : MainActivity.TYPE_SEARCH_BY_NAME;
-        // int layoutId;
 
         mSearchType = getArguments().getInt(KEY_TYPE, 0);
 
@@ -92,10 +88,6 @@ public class MainFragment extends BaseFragment {
         return mViewDataBinding.getRoot();
     }
 
-//    public void setSearchType(int mSearchType) {
-//        this.mSearchType = mSearchType;
-//    }
-
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -117,9 +109,7 @@ public class MainFragment extends BaseFragment {
                 return true;
             }
             case R.id.mi_add: {
-                //FilmDetailActivity.startActivity(getContext(), -1);
-
-                FilmDetailDialogFragment filmDetailDialogFragment = new FilmDetailDialogFragment();
+                FilmDetailDialogFragment filmDetailDialogFragment = FilmDetailDialogFragment.newInstance(-1);
                 filmDetailDialogFragment.show(getActivity().getSupportFragmentManager(), "filmDetailDialogFragment");
                 return true;
             }

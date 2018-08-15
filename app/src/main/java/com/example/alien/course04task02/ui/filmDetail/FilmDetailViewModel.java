@@ -43,47 +43,37 @@ public class FilmDetailViewModel extends BaseViewModel {
         return mName;
     }
 
-    public void setName(CharSequence mName) {
-        this.mName.postValue(mName.toString());
+    public void setName(String mName) {
+        this.mName.postValue(mName);
     }
 
     public MutableLiveData<String> getYear() {
         return mYear;
     }
 
-    public void setYear(CharSequence mYear) {
-        this.mYear.postValue(mYear.toString());
-    }
 
     public MutableLiveData<String> getDirector() {
         return mDirector;
-    }
-
-    public void setDirector(CharSequence mDirector) {
-        this.mDirector.postValue(mDirector.toString());
     }
 
     public MutableLiveData<String> getRating() {
         return mRating;
     }
 
-    public void setRating(CharSequence mRating) {
-        this.mRating.postValue(mRating.toString());
-    }
 
-    public void apply() {
-        int year = 0;
-        double rating = 0;
+    public void apply(String name, String director, String year, String rating) {
+        int yearInt = 0;
+        double ratingDbl = 0;
         try {
-            year = Integer.valueOf(mYear.getValue());
-            rating = Double.valueOf(mRating.getValue());
+            yearInt = Integer.valueOf(year);
+            ratingDbl = Double.valueOf(rating);
         } catch (Throwable t) {
             Timber.d(t);
         }
         if (mFilmId < 0) {
-            mRepository.createFilmAndSave(mName.getValue(), mDirector.getValue(), year, rating);
+            mRepository.createFilmAndSave(name, director, yearInt, ratingDbl);
         } else {
-            mRepository.createFilmAndUpdate(mFilmId, mName.getValue(), mDirector.getValue(), year, rating);
+            mRepository.createFilmAndUpdate(mFilmId, name, director, yearInt, ratingDbl);
         }
         mIsSaved.postValue(true);
     }

@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:src="@drawable/ic_save_black_48dp"
-            android:onClick="@{() -> vm.apply()}"/>
+           />
 
         <TextView
             android:id="@+id/tvName"
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvName"
             android:text="@{vm.name}"
-            android:onTextChanged="@{(text, start, before, count) -> vm.setName(text)}"/>
+            />
 
         <TextView
             android:id="@+id/tvYear"
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvYear"
             android:text="@{vm.year}"
-            android:onTextChanged="@{(text, start, before, count) -> vm.setYear(text)}"/>
+           />
 
         <TextView
             android:id="@+id/tvDirector"
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvDirector"
             android:text="@{vm.director}"
-            android:onTextChanged="@{(text, start, before, count) -> vm.setDirector(text)}"/>
+            />
 
         <TextView
             android:id="@+id/tvRate"
@@ -77,7 +77,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvRate"
             android:text="@{vm.rating}"
-            android:onTextChanged="@{(text, start, before, count) -> vm.setRating(text)}"/>
+            />
 
     </RelativeLayout>
 </layout>

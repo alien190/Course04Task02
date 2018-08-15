@@ -1,11 +1,9 @@
 package com.example.alien.course04task02.ui.filmDetail;
 
 import android.app.Dialog;
-import android.arch.lifecycle.ViewModel;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -17,7 +15,6 @@ import com.example.alien.course04task02.R;
 import com.example.alien.course04task02.di.FilmDetailDialogFragmentModule;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,6 +44,13 @@ public class FilmDetailDialogFragment extends DialogFragment {
     @BindView(R.id.etRate)
     protected EditText etRate;
 
+    private DialogInterface.OnClickListener mOnClickListener = (dialogInterface, i) -> {
+        mViewModel.apply(etName.getText().toString(),
+                etDirector.getText().toString(),
+                etYear.getText().toString(),
+                etRate.getText().toString());
+
+    };
 
     public static FilmDetailDialogFragment newInstance(long id) {
 
@@ -70,8 +74,8 @@ public class FilmDetailDialogFragment extends DialogFragment {
         initUI(view);
 
         builder.setView(view)
-                .setPositiveButton("ok", null)
-                .setNegativeButton("cancel", null);
+                .setPositiveButton(R.string.btn_save_label, mOnClickListener)
+                .setNegativeButton(R.string.btn_cancel_label, null);
 
         return builder.create();
     }
@@ -94,7 +98,7 @@ public class FilmDetailDialogFragment extends DialogFragment {
         super.onDetach();
     }
 
-    private void initUI(View view){
+    private void initUI(View view) {
         ButterKnife.bind(this, view);
 
         tvTitle.setText(mViewModel.getTitleId());
@@ -103,4 +107,6 @@ public class FilmDetailDialogFragment extends DialogFragment {
         mViewModel.getYear().observe(this, str -> etYear.setText(str));
         mViewModel.getRating().observe(this, str -> etRate.setText(str));
     }
+
+
 }

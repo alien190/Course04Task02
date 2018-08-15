@@ -22,4 +22,6 @@
     <string name="list_empty">Список пуст</string>
     <string name="dialog_title_new_film">Добавить фильм</string>
     <string name="dialog_title_edit_film">Редактировать фильм</string>
+    <string name="btn_save_label">Сохранить</string>
+    <string name="btn_cancel_label">Отмена</string>
 </resources>
