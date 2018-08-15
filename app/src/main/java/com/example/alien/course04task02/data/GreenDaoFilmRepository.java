@@ -5,6 +5,8 @@ import com.example.alien.course04task02.data.model.FilmDao;
 
 import java.util.List;
 
+import io.realm.Case;
+
 public class GreenDaoFilmRepository implements IFilmRepository {
 
     private FilmDao mFilmDao;
@@ -65,7 +67,15 @@ public class GreenDaoFilmRepository implements IFilmRepository {
 
     @Override
     public List<Film> search(String query) {
-        return null;
+        if (query != null && query.length() >= MIN_LENGTH_FOR_NAME_SEARCH) {
+            query = "%" + query + "%";
+        } else {
+            query = "";
+        }
+
+        return mFilmDao.queryBuilder()
+                .where(FilmDao.Properties.Name.like(query))
+                .list();
     }
 
     @Override
