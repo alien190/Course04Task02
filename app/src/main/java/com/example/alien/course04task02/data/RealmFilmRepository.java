@@ -10,7 +10,6 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import io.realm.Case;
 import io.realm.Realm;
-import io.realm.RealmResults;
 import io.realm.Sort;
 
 public class RealmFilmRepository implements IFilmRepository {
@@ -19,7 +18,6 @@ public class RealmFilmRepository implements IFilmRepository {
     private AtomicLong currentId = new AtomicLong();
     private Realm mRealm;
 
-    RealmResults<Film> realmResults;
 
     public RealmFilmRepository() {
         mRealm = Realm.getDefaultInstance();
@@ -38,6 +36,7 @@ public class RealmFilmRepository implements IFilmRepository {
         mRealm.beginTransaction();
         mRealm.copyToRealm(film);
         mRealm.commitTransaction();
+        EventBus.getDefault().post(new OnFilmDataBaseUpdate());
         return film.getId();
     }
 
@@ -50,7 +49,7 @@ public class RealmFilmRepository implements IFilmRepository {
 
     @Override
     public Film getItem(long id) {
-        return getFilmById(id);
+        return mRealm.copyFromRealm(getFilmById(id));
     }
 
     @Override
@@ -63,12 +62,15 @@ public class RealmFilmRepository implements IFilmRepository {
             isSuccessful = true;
         }
         mRealm.commitTransaction();
+        EventBus.getDefault().post(new OnFilmDataBaseUpdate());
         return isSuccessful;
     }
 
     @Override
     public List<Film> getAll() {
-        return mRealm.where(Film.class).findAll().sort("id", Sort.ASCENDING);
+        return mRealm.copyFromRealm(mRealm.where(Film.class)
+                .findAll()
+                .sort("id", Sort.ASCENDING));
     }
 
     @Override
@@ -76,6 +78,7 @@ public class RealmFilmRepository implements IFilmRepository {
         mRealm.beginTransaction();
         mRealm.copyToRealmOrUpdate(Film);
         mRealm.commitTransaction();
+        EventBus.getDefault().post(new OnFilmDataBaseUpdate());
     }
 
     private Film getFilmById(long id) {
@@ -91,27 +94,37 @@ public class RealmFilmRepository implements IFilmRepository {
     public List<Film> search(String query) {
         if (query != null && query.length() >= MIN_LENGTH_FOR_NAME_SEARCH) {
             query = "*" + query + "*";
+            return mRealm.copyFromRealm(mRealm.where(Film.class)
+                    .like("name", query, Case.INSENSITIVE)
+                    .findAll());
         } else {
-            query = "";
+            return new ArrayList<>();
         }
-        return mRealm.where(Film.class).like("name", query, Case.INSENSITIVE).findAll();
     }
 
     @Override
     public List<Film> searchInBounds(int startYear, int endYear) {
         if (endYear == 0) {
-            return mRealm.where(Film.class).equalTo("year", startYear).findAll();
+            return mRealm.copyFromRealm(mRealm.where(Film.class)
+                    .equalTo("year", startYear)
+                    .sort("year", Sort.ASCENDING)
+                    .findAll());
         } else {
-            return mRealm.where(Film.class).between("year", startYear, endYear).findAll();
+            return mRealm.copyFromRealm(mRealm.where(Film.class)
+                    .between("year", startYear, endYear)
+                    .sort("year", Sort.ASCENDING)
+                    .findAll());
         }
     }
 
     @Override
     public List<Film> searchByDirector(String name) {
         if (name == null || name.length() < MIN_LENGTH_FOR_DIRECTOR_SEARCH) {
-            return mRealm.where(Film.class).like("director", "").findAll();
+            return new ArrayList<>();
         }
-        return mRealm.where(Film.class).beginsWith("director", name, Case.INSENSITIVE).findAll();
+        return mRealm.copyFromRealm(mRealm.where(Film.class)
+                .beginsWith("director", name, Case.INSENSITIVE)
+                .findAll());
     }
 
     @Override
@@ -136,5 +149,6 @@ public class RealmFilmRepository implements IFilmRepository {
         updateItem(film);
     }
 
-
+    class OnFilmDataBaseUpdate implements IOnFilmDataBaseUpdate {
+    }
 }

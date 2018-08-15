@@ -1,11 +1,11 @@
 package com.example.alien.course04task02.ui.filmList;
 
 import com.example.alien.course04task02.data.IFilmRepository;
+import com.example.alien.course04task02.data.model.Film;
 import com.example.alien.course04task02.ui.common.BaseViewModel;
 import com.google.gson.Gson;
 
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
+import java.util.List;
 
 public class ListAllViewModel extends BaseViewModel {
 
@@ -16,6 +16,7 @@ public class ListAllViewModel extends BaseViewModel {
 
     @Override
     protected void updateFromRepository() {
-        mFilmList.postValue(mRepository.getAll());
+        List<Film> films = mRepository.getAll();
+        mFilmList.postValue(films);
     }
 }

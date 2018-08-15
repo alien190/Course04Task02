@@ -17,7 +17,7 @@ android {
                 arguments = [ toothpick_registry_package_name : 'com.example.alien.course04task02' ]
             }
         }
-        buildConfigField("Boolean", "useRealm", "false")
+        buildConfigField("Boolean", "useRealm", "true")
     }
     buildTypes {
         release {

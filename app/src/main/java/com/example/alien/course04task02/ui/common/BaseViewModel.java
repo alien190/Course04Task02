@@ -73,7 +73,7 @@ public abstract class BaseViewModel extends ViewModel {
         super.onCleared();
     }
 
-    @Subscribe(threadMode = ThreadMode.ASYNC)
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onFilmDataBaseUpdate(IFilmRepository.IOnFilmDataBaseUpdate event)
     {
         updateFromRepository();
