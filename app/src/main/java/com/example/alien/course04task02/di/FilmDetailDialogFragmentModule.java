@@ -7,6 +7,7 @@ import com.example.alien.course04task02.ui.filmDetail.FilmDetailFragment;
 import com.example.alien.course04task02.ui.filmDetail.FilmDetailViewModel;
 import com.example.alien.course04task02.ui.filmDetail.FilmDetailViewModelCustomFactory;
 
+import javax.inject.Inject;
 import javax.inject.Provider;
 
 import toothpick.config.Module;
@@ -21,7 +22,6 @@ public class FilmDetailDialogFragmentModule extends Module {
         this.mFilmId = filmId;
 
         bind(DialogFragment.class).toInstance(mFragment);
-
         bind(FilmDetailViewModel.class).toProvider(FilmDetailViewModelProvider.class);
         bind(Long.class).withName("FilmId").toInstance(mFilmId);
         bind(FilmDetailViewModelCustomFactory.class).toProvider(FilmDetailViewModelCustomFactoryProvider.class);

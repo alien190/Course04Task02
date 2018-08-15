@@ -2,6 +2,7 @@ package com.example.alien.course04task02.ui.filmDetail;
 
 import android.arch.lifecycle.MutableLiveData;
 
+import com.example.alien.course04task02.R;
 import com.example.alien.course04task02.data.IFilmRepository;
 import com.example.alien.course04task02.data.model.Film;
 import com.example.alien.course04task02.ui.common.BaseViewModel;
@@ -16,6 +17,7 @@ public class FilmDetailViewModel extends BaseViewModel {
     private MutableLiveData<String> mRating = new MutableLiveData<>();
     private MutableLiveData<Boolean> mIsSaved = new MutableLiveData<>();
     private Long mFilmId;
+    private int mTitleId;
 
     public FilmDetailViewModel(IFilmRepository repository, Gson gson, Long filmId) {
         super(repository, gson);
@@ -23,6 +25,9 @@ public class FilmDetailViewModel extends BaseViewModel {
         mFilmId = filmId;
         if (mFilmId >= 0) {
             loadFilm();
+            mTitleId = R.string.dialog_title_edit_film;
+        } else {
+            mTitleId = R.string.dialog_title_new_film;
         }
     }
 
@@ -85,5 +90,9 @@ public class FilmDetailViewModel extends BaseViewModel {
 
     public MutableLiveData<Boolean> getIsSaved() {
         return mIsSaved;
+    }
+
+    public int getTitleId() {
+        return mTitleId;
     }
 }

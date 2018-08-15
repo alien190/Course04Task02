@@ -20,4 +20,6 @@
     <string name="yes_label">да</string>
     <string name="start_greeting">Для изменения - короткое нажитие  Для редактирования - длинное</string>
     <string name="list_empty">Список пуст</string>
+    <string name="dialog_title_new_film">Добавить фильм</string>
+    <string name="dialog_title_edit_film">Редактировать фильм</string>
 </resources>
