@@ -15,12 +15,12 @@ public class FilmListFragmentModule extends Module {
     public FilmListFragmentModule(Fragment fragment) {
         mFragment = fragment;
 
-        bind(FilmListAdapter.class).toInstance(new FilmListAdapter(null));
-
         if (mFragment instanceof IOnItemClickListener) {
             bind(FilmListRealmAdapter.class).toInstance(new FilmListRealmAdapter((IOnItemClickListener) mFragment));
+            bind(FilmListAdapter.class).toInstance(new FilmListAdapter((IOnItemClickListener) mFragment));
         } else {
             bind(FilmListRealmAdapter.class).toInstance(new FilmListRealmAdapter(null));
+            bind(FilmListAdapter.class).toInstance(new FilmListAdapter(null));
         }
     }
 

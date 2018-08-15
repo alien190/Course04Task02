@@ -44,7 +44,13 @@ public class GreenDaoFilmRepository implements IFilmRepository {
 
     @Override
     public boolean deleteItem(long id) {
-        return false;
+        mFilmDao.queryBuilder()
+                .where(FilmDao.Properties.Id.eq(id))
+                .buildDelete()
+                .executeDeleteWithoutDetachingEntities();
+
+        //todo как получить резултат удаления?
+        return true;
     }
 
     @Override
