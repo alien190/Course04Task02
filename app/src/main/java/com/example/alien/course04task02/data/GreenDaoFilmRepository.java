@@ -98,7 +98,7 @@ public class GreenDaoFilmRepository implements IFilmRepository {
     public List<Film> searchByDirector(String name) {
         if (name != null && name.length() >= MIN_LENGTH_FOR_DIRECTOR_SEARCH) {
             return mFilmDao.queryBuilder()
-                    .where(Properties.Director.like(name+"%"))
+                    .where(Properties.Director.like(name + "%"))
                     .list();
         } else {
             return new ArrayList<>();
@@ -107,7 +107,13 @@ public class GreenDaoFilmRepository implements IFilmRepository {
 
     @Override
     public List<Film> getTopFilms(int count) {
-        return null;
+        if (count < 0) {
+            count = 0;
+        }
+        return mFilmDao.queryBuilder()
+                .orderDesc(Properties.Rating)
+                .limit(count)
+                .list();
     }
 
     @Override
