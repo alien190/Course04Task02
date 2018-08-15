@@ -1,11 +1,17 @@
 package com.example.alien.course04task02.ui.filmDetail;
 
 import android.app.Dialog;
+import android.arch.lifecycle.ViewModel;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.alien.course04task02.R;
 import com.example.alien.course04task02.di.FilmDetailDialogFragmentModule;
@@ -13,6 +19,8 @@ import com.example.alien.course04task02.di.FilmDetailDialogFragmentModule;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import toothpick.Scope;
 import toothpick.Toothpick;
 
@@ -23,6 +31,21 @@ public class FilmDetailDialogFragment extends DialogFragment {
 
     @Inject
     protected FilmDetailViewModel mViewModel;
+
+    @BindView(R.id.tvTitle)
+    protected TextView tvTitle;
+
+    @BindView(R.id.etName)
+    protected EditText etName;
+
+    @BindView(R.id.etDirector)
+    protected EditText etDirector;
+
+    @BindView(R.id.etYear)
+    protected EditText etYear;
+
+    @BindView(R.id.etRate)
+    protected EditText etRate;
 
 
     public static FilmDetailDialogFragment newInstance(long id) {
@@ -43,10 +66,13 @@ public class FilmDetailDialogFragment extends DialogFragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
+        View view = inflater.inflate(R.layout.fr_detail_dialog_fragment, null);
+        initUI(view);
 
-        builder.setView(inflater.inflate(R.layout.fr_detail_dialog_fragment, null))
+        builder.setView(view)
                 .setPositiveButton("ok", null)
                 .setNegativeButton("cancel", null);
+
         return builder.create();
     }
 
@@ -61,9 +87,20 @@ public class FilmDetailDialogFragment extends DialogFragment {
         Toothpick.inject(this, mScope);
     }
 
+
     @Override
     public void onDetach() {
         Toothpick.closeScope(this.getClass().getSimpleName());
         super.onDetach();
+    }
+
+    private void initUI(View view){
+        ButterKnife.bind(this, view);
+
+        tvTitle.setText(mViewModel.getTitleId());
+        mViewModel.getName().observe(this, str -> etName.setText(str));
+        mViewModel.getDirector().observe(this, str -> etDirector.setText(str));
+        mViewModel.getYear().observe(this, str -> etYear.setText(str));
+        mViewModel.getRating().observe(this, str -> etRate.setText(str));
     }
 }
