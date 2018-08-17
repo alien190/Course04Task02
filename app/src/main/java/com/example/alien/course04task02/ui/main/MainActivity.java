@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // Toothpick.closeScope(this.getClass().getSimpleName());
+         Toothpick.closeScope(mScopeName);
     }
 
     private void toothpickInject() {
